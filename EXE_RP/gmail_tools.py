@@ -114,5 +114,5 @@ def gmail_NO_attachment(recipient, subject, body, sender, senderpwd, signaturefi
     mailServer.sendmail(gmail_user, recipient, msg.as_string())
     # Should be mailServer.quit(), but that crashes...
     mailServer.close()
-##gmail_NO_attachment('rob.prior@actant.com', 'testnew', 'testnewbody', 'rob.prior@actant.com', 'clipper123', path +'rpsignaturefile.txt')
+##gmail_NO_attachment('rob.prior@actant.com', 'testnew', 'testnewbody', 'rob.prior@actant.com', 'cxxxxxx', path +'rpsignaturefile.txt')
 ##########################################

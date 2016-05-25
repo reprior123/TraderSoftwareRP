@@ -26,7 +26,7 @@ msg = 'My IP is' + html + ' Right NOW!'
 
 sender = 'rob.prior@actant.com'
 recipient = 'reprior123@gmail.com'
-senderpwd = 'clipper123'
+senderpwd = 'xxxxxx'
 subject ='IPaddre'
 body = html
 signaturefile = 'signaturefile.txt'

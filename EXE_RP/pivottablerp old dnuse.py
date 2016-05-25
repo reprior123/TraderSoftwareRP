@@ -65,6 +65,6 @@ subject = 'recent sage flash output'
 body = 'see report pls'
 attachment_fullpath = filename
 sender = 'rob.prior@actant.com'
-senderpwd = 'clipper123'
+senderpwd = 'xxxxxxx'
 ccnamelisttext = sender
 ##rputiles.gmail_attachment(recipient, subject, body, attachment_fullpath, sender, senderpwd, ccnamelisttext)
