@@ -1,12 +1,7 @@
 import sys,os
 localtag = '_RP'
-
-##import winpwd
-##print winpwd.getpwuid(os.getuid()).pw_gecos
-
 import getpass
 localuser =getpass.getuser()
-
 
 print 'importing envdicts from exe..'
 global path,rootpath,EXE

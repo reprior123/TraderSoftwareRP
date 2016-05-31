@@ -27,7 +27,63 @@ for module in moduleNames:
     else:
         print 'is self'
 #####################
+def mysql_backer_upper_speedy():
+    '''
+this is all in shell and needs to be adapted to python os.system...
+
+        ( 
+    echo "SET AUTOCOMMIT=0;"
+    echo "SET UNIQUE_CHECKS=0;"
+    echo "SET FOREIGN_KEY_CHECKS=0;"
+    cat dump.sql
+    echo "SET FOREIGN_KEY_CHECKS=1;"
+    echo "SET UNIQUE_CHECKS=1;"
+    echo "SET AUTOCOMMIT=1;"
+    echo "COMMIT;"
+) | mysql -u... -p... target_database
 ############################
+
+Speeding things up
+Dumps
+
+With the most recent versions of MySQL commonly in use these days, the single most useful option available with mysqldump is –opt. This option is actually a sort of shortcut for a group of other options; among these, there are a few ones that can help speed up backups, but also -more importantly- restores.
+
+Update: it looks like the –opt option is now switched on by default on the latest versions of MySQL, so the following details are for reference in case you use a very recent version (and you should!).
+
+These options are:
+
+–add-locks
+
+Affects restores: this option ensures that each table is locked while restoring, so to allow dropping and recreating the tables. At the same time, because a table remains locked to other transactions while restoring the data, inserts happen more quickly, therefore reducing the time taken to restore the content of the table.
+
+–create-options
+
+Affects restores: makes the creation of a table quicker by merging into the CREATE TABLE statement anything that has to do with defining the structure of the table.
+
+–disable-keys
+
+Affects restores: it helps when restoring databases using MyISAM as storage engine. Delays the creation of the indexes for a table until all the data in that table has been restored. This results in an overall faster restore of the table vs updating indexes while restoring the data.
+
+–extended-insert
+
+Affects both dumps and restores: this can speed up A LOT restores, as it produces in the final SQL dump INSERT commands with multiple sets of values, resulting in the insertion of multiple rows at once. As a side benefit vs having a separate INSERT statement for each row, the resulting SQL dump will also be smaller, taking up less storage space.
+
+–lock-tables
+
+Affects dumps: improves dumping of MyISAM tables, by locking all the tables during the dump.
+
+–quick Affects dumps: when dumping large tables, this option prevents buffering the whole tables before dumping them to the backup file. Instead, rows are fetched and dumped right away to file, resulting in an overall faster and lighter dump thanks to reduced load on the system.
+
+Restores
+
+As I’ve just suggested, the –opt argument also helps with speeding up restores. However there’s another trick that I use whenever I need to restore a dump, as it can save a lot of time. When a dump is being restored, I simply disable a number of checks that MySQL has to perform to ensure the integrity of the data, with foreign keys and more, and then I enable these again soon after the data has been completely restored.
+
+One problem is that if the dump file I need to restore are pretty large, it’s not a good idea to edit the content of the file to make these changes. So.. cat to the rescue!
+
+I basically use cat to produce a new string output containing the changes I just described plus the content of the original dump file, and then I stream this output directly to the target MySQL instance for restore:
+
+
+'''
 def write_sqlite(tablename,fieldarray,formatdict,defvaluedict):
     import fileinput
     fnames = fieldarray #['name','role']
