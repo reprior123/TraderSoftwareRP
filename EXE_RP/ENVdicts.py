@@ -1,5 +1,13 @@
 import sys,os
 localtag = '_RP'
+
+##import winpwd
+##print winpwd.getpwuid(os.getuid()).pw_gecos
+
+import getpass
+localuser =getpass.getuser()
+
+
 print 'importing envdicts from exe..'
 global path,rootpath,EXE
 path = os.getcwd() + '/' ##supress
@@ -99,7 +107,7 @@ def ENVdicts(localtag):
     TS = Cpath + 'TS/'
     AS = Cpath + 'as/'
     ################################
-    musername = EXE.split('\\')[2] 
+    musername = localuser
     date_format  = "%d-%m-%Y"
     unix_format  = "%Y%m%d"
     unixmin_format  = "%H%M"
