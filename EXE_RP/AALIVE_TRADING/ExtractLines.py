@@ -2,8 +2,6 @@ import os, sys
 localtag = '_RP'
 sys.path[0:0] = [((os.getcwd().replace('EXE','|')).split('|'))[0] + 'EXE' +localtag]
 #########################################
-
-
 import ENVdicts
 nd ={}
 nd = ENVdicts.ENVdicts(localtag)
@@ -69,10 +67,6 @@ def extract_wbmails(myusername,mypassword):
         print email_message['From'],email_message['Subject'] 
         bla = multibody(email_message)
         rpu_rp.WriteStringsToFile('BlountNewEmail.txt',bla)
-raw_input('remember to add weekly pivot...')
-wbfile = 'BlountNewEmail.txt'
-osCommandString = 'notepad.exe ' + wbfile 
-os.system(osCommandString)
 
 ########################
 username = 'reprior123@gmail.com'
@@ -80,6 +74,11 @@ mypassword = 'bla'
 mypassword = raw_input('pw here: ')
 extract_wbmails(username,mypassword)
 ######################
+raw_input('remember to add weekly pivot...')
+wbfile = 'BlountNewEmail.txt'
+osCommandString = 'notepad.exe ' + wbfile 
+os.system(osCommandString)
+####################
 def convert_emailtolines():
     wbfile = downloads +'BlountNewEmail.txt'
     wbfile = 'BlountNewEmail.txt'

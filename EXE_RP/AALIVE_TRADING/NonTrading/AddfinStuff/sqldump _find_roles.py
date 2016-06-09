@@ -98,7 +98,7 @@ dbname = 'marketing.addfin05_20150906_2142.sql'
 dbname = 'addfin_20150822_1205.sql'
 dbname = 'sugar.sql'
 import rpu_rp
-dbname = downloads + 'sugar.sql'
+dbname = downloads + 'addfin03_db.sql/addfin03_db.sql'
 tablename = fheader =''
 numrecords =1
 fheaderflag = contentsflag = 'n'
@@ -112,64 +112,64 @@ tablenames = ['contacts','accounts']
 prevtablename =''
 newfieldsflag = 'n'
 print '#####################################'
+outputarea = downloads + 'outtemp/'
+tablenametarget = 'DatabaseProducts'
 for l in rpu_rp.TxtToLines(dbnamefull):
     line = str(l)
-    if 'rolesxxxxxx' in line:
-        print line
-    
-##    print line
-    rline= l.replace('),(','|').split('|')
-##    if 'UNLOCK TABLES;' in str(l):
-##        newtflag = 'y'
+    rline= line.replace('),(','|').replace('VALUES (','|')
     if 'DROP TABLE IF EXISTS' in str(l):
-            bla =[]
-            tablename = l.split()[4].replace('`','').replace(';','')
-##            print tablename
-            newtflag = newfieldsflag = 'y'
-            pass
-
-    if 'INSERT INTO' in str(l):# and tablename == 'acl_roles':
-##        print l
-        records = l.split('(')
-        for b in records:
-            if 'Signa' in str(b):
-                bla.append(b)
-            pass
-        print tablename, bla
-            
-        numrecords = len(rline)
+        bla =[]
+        tablename = l.split()[4].replace('`','').replace(';','')
+        rpu_rp.WriteArrayToCsvfile(outputarea +tablename +'dbtable.csv',bla)
+        newtflag = newfieldsflag = 'y'
+        
+    if 'INSERT INTO' in str(l):                           
         newfieldsflag = 'n'
-    if newfieldsflag == 'y' and 'role' in tablename and tablename != prevtablename:
-        print tablename
-##        print l
+
     if 'CREATE TABLE' in str(l):
         fheaderflag ='y'
-    if fheaderflag == 'y' and 'CREATE TABLE' not in line  and 'PRIMARY KEY ' not in line:
+    if 'KEY' in str(l) or 'ENGINE' in str(l):
+        fheaderflag ='n'
+
+    if fheaderflag == 'y' and 'CREATE TABLE' not in line  and 'PRIMARY KEY ' not in line and 'INSERT' not in line:
 ##        print l
-        rarray = l.strip().split('`')
-##        print l.strip()
-
-        fheaderdefvalue = fheaderformat = ''
-        if len(rarray) > 1  and ' for table ' not in line:
-##            print rarray
-            fheadname = rarray[1]
-            fheader +=  fheadname
-            fheaderdeffaluelen = len(rarray[2].replace('DEFAULT',';').split(';'))
-            if fheaderdeffaluelen >1:
-                fheaderdefvalue = rarray[2].replace('DEFAULT',';').split(';')[1]
-##            fheaderformat = rarray[2].split()[0]
-            fheaderformat = ''#rarray[0].split()[0]
-
-            fheader +='|'
-            fheaderarray.append(fheadname)
-            fheaderformatarray.append(fheaderformat)
-            fheadformatdict[fheadname] = fheaderformat.replace(',','')
-            fheaddefvaluedict[fheadname] = fheaderdefvalue.replace(',','')
-
-            fheaderdefvaluearray.append(fheaderdefvalue)
-
+        fheadname = l.strip().split('`')[1]   
+##        print fheadname
+        fheaderarray.append(fheadname)
+##        fheaderdefvalue = fheaderformat = ''     
+##        if len(rarray) > 1  and ' for table ' not in line:
+####            print rarray
+##            fheadname = rarray[1]
+##            fheader +=  fheadname
+##            fheaderdeffaluelen = len(rarray[2].replace('DEFAULT',';').split(';'))
+##            if fheaderdeffaluelen >1:
+##                fheaderdefvalue = rarray[2].replace('DEFAULT',';').split(';')[1]
+####            fheaderformat = rarray[2].split()[0]
+##            fheaderformat = ''#rarray[0].split()[0]
+##            fheader +='|'
+##            fheaderarray.append(fheadname)
+##            fheaderformatarray.append(fheaderformat)
+##            fheadformatdict[fheadname] = fheaderformat.replace(',','')
+##            fheaddefvaluedict[fheadname] = fheaderdefvalue.replace(',','')
+##            fheaderdefvaluearray.append(fheaderdefvalue)
+##        
+    if 'INSERT INTO' in str(l):# and tablename == 'acl_roles':
+        records = rline.split('|')
+        numrecordsnew = len(records)
+######        print fheaderarray
+        if tablename == tablenametarget:
+            rpu_rp.WriteArrayToCsvfileAppend(outputarea +tablename +'dbtable.csv',fheaderarray)
+        if tablename == tablenametarget :
+            for record  in records:
+                bla.append(record.split(','))
+##                print record
+            rpu_rp.WriteArrayToCsvfileAppend(outputarea +tablename +'dbtable.csv',bla)           
+        numrecords = len(records)
+    if newfieldsflag == 'y' and 'r' in tablename and tablename != prevtablename:
+        print tablename,numrecordsnew
     if 'VALUES'  in str(l):
         contentsflag = 'y'
+        fheaderflag ='n'
     if 'ALTER TABLE' in str(l):
         contentsflag ='n'
 ##    if 'Dumping data for table' in line:
