@@ -2,8 +2,6 @@ import os, sys
 localtag = '_RP'
 sys.path[0:0] = [((os.getcwd().replace('EXE','|')).split('|'))[0] + 'EXE' +localtag]
 #########################################
-
-
 import ENVdicts
 nd ={}
 nd = ENVdicts.ENVdicts(localtag)
@@ -69,8 +67,6 @@ def extract_wbmails(myusername,mypassword):
         print email_message['From'],email_message['Subject'] 
         bla = multibody(email_message)
         rpu_rp.WriteStringsToFile('BlountNewEmail.txt',bla)
-
-
 ########################
 username = 'reprior123@gmail.com'
 mypassword = 'bla'
@@ -194,10 +190,15 @@ def create_dailypivots(sym):
         line=[]
         line.append(item)
         line.append(tag)
+        
         lines.append(line)      
     for line in lines:
         print line
-    rpu_rp.WriteArrayToCsvfile(outfile,lines)
+    rpu_rp.WriteArrayToCsvfile('input.txt',lines)
+    with open('input.txt') as inp, open(outfile, 'w') as out:
+        txt = inp.read()
+        txt = txt.replace('\n', '\r\n')
+        out.write(txt)
 ##############
 create_dailypivots('ES')
 create_dailypivots('FDAX')
@@ -222,7 +223,12 @@ def create_roundie(centerprice,increment,loopnum,sym):
         lines.append(line)
     for line in lines:
         print line
-    rpu_rp.WriteArrayToCsvfile(outfile,lines)
+    rpu_rp.WriteArrayToCsvfile('input.txt',lines)
+
+    with open('input.txt') as inp, open(outfile, 'w') as out:
+        txt = inp.read()
+        txt = txt.replace('\n', '\r\n')
+        out.write(txt)
 ##############
 centerprice = 1900
 increment = 10
@@ -255,3 +261,50 @@ wbfile = libarea +'SpotsFull.' + sym +'.txt'
 osCommandString = 'notepad.exe ' + wbfile 
 ##osCommandString = 'cat ' + wbfile 
 os.system(osCommandString)
+
+
+'''
+diff --cc EXE_RP/AALIVE_TRADING/ExtractLines.py
+index 63e1df2,bba62fa..0000000
+--- a/EXE_RP/AALIVE_TRADING/ExtractLines.py
++++ b/EXE_RP/AALIVE_TRADING/ExtractLines.py
+@@@ -67,18 -69,21 +67,29 @@@ def extract_wbmails(myusername,mypasswo
+          print email_message['From'],email_message['Subject']
+          bla = multibody(email_message)
+          rpu_rp.WriteStringsToFile('BlountNewEmail.txt',bla)
+ -
+++##<<<<<<< HEAD
+++##=======
+++##
+++##>>>>>>> 19e75e22e060800993a3bcc20cd86a6d050270f3
+
+  ########################
+  username = 'reprior123@gmail.com'
+  mypassword = 'bla'
+  mypassword = raw_input('pw here: ')
+  extract_wbmails(username,mypassword)
++
++ ##raw_input('remember to add weekly pivot...')
++ wbfile = 'BlountNewEmail.txt'
++ osCommandString = 'notepad.exe ' + wbfile
++ ##osCommandString = 'cat ' + wbfile
++ ##os.system(osCommandString)
++
+  ######################
+ +raw_input('remember to add weekly pivot...')
+ +wbfile = 'BlountNewEmail.txt'
+ +osCommandString = 'notepad.exe ' + wbfile
+ +os.system(osCommandString)
+ +####################
+  def convert_emailtolines():
+      wbfile = downloads +'BlountNewEmail.txt'
+      wbfile = 'BlountNewEmail.txt'
+
+RobAdmin@base03 MINGW64 /c/GITTRADERRP/TraderSoftwareRP (master|MERGING)
+$ git rm EXE_RP/AALIVE_TRADING/ExtractLines.py
+EXE_RP/AALIVE_TRADING/ExtractLines.py: needs merge
+rm 'EXE_RP/AALIVE_TRADING/ExtractLines.py'
+
+RobAdmin@base03 MINGW64 /c/GITTRADERRP/TraderSoftwareRP (master|MERGING)
+
+'''

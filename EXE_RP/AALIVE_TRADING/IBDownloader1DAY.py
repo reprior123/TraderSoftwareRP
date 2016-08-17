@@ -6,6 +6,7 @@ titleself = (os.path.basename(__file__)).replace('.pyc','')
 print titleself
 ###########
 
+
 localtag = '_RP'
 sys.path[0:0] = [((os.getcwd().replace('EXE','|')).split('|'))[0] + 'EXE' +localtag]
 #########################################

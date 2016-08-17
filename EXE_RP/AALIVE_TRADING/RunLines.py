@@ -11,6 +11,7 @@ sys.path[0:0] = [((os.getcwd().replace('EXE','|')).split('|'))[0] + 'EXE' +local
 import ENVdicts,rpu_rp 
 nd ={}
 nd = ENVdicts.ENVdicts(localtag)
+
 for var in nd.keys():
 ##    print var
     locals()[var] = nd[var]
