@@ -67,9 +67,11 @@ def extract_wbmails(myusername,mypassword):
         print email_message['From'],email_message['Subject'] 
         bla = multibody(email_message)
         rpu_rp.WriteStringsToFile('BlountNewEmail.txt',bla)
+
+
 ########################
 username = 'reprior123@gmail.com'
-mypassword = 'bla'
+mypassword = 'Clipper4013'
 mypassword = raw_input('pw here: ')
 extract_wbmails(username,mypassword)
 
@@ -190,15 +192,10 @@ def create_dailypivots(sym):
         line=[]
         line.append(item)
         line.append(tag)
-        
         lines.append(line)      
     for line in lines:
         print line
-    rpu_rp.WriteArrayToCsvfile('input.txt',lines)
-    with open('input.txt') as inp, open(outfile, 'w') as out:
-        txt = inp.read()
-        txt = txt.replace('\n', '\r\n')
-        out.write(txt)
+    rpu_rp.WriteArrayToCsvfile(outfile,lines)
 ##############
 create_dailypivots('ES')
 create_dailypivots('FDAX')
@@ -223,12 +220,7 @@ def create_roundie(centerprice,increment,loopnum,sym):
         lines.append(line)
     for line in lines:
         print line
-    rpu_rp.WriteArrayToCsvfile('input.txt',lines)
-
-    with open('input.txt') as inp, open(outfile, 'w') as out:
-        txt = inp.read()
-        txt = txt.replace('\n', '\r\n')
-        out.write(txt)
+    rpu_rp.WriteArrayToCsvfile(outfile,lines)
 ##############
 centerprice = 1900
 increment = 10
