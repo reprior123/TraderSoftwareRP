@@ -135,8 +135,12 @@ def diff2files(file1, file2, mode):
             text2 = b.readlines()
     except:
         print 'file[s] could not load'
+        txt2len = 1
+        txt1len = 1
+        text1= text2 =''
     txt2len = len(text2)
     txt1len = len(text1)
+    
     import difflib
     d = difflib.Differ()
     result = (d.compare(text1, text2))
@@ -146,6 +150,8 @@ def diff2files(file1, file2, mode):
         if mode == 'subtracts' and '-' == line[0]:
             output.append(line)
         if mode == 'changes' and '-' ==line[0] or '+' == line[0]:
+            output.append(line)
+        if mode != 'xxxx' :
             output.append(line)
         else:
             pass   

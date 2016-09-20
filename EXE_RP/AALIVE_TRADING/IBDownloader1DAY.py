@@ -6,6 +6,7 @@ titleself = (os.path.basename(__file__)).replace('.pyc','')
 print titleself
 ###########
 
+
 localtag = '_RP'
 sys.path[0:0] = [((os.getcwd().replace('EXE','|')).split('|'))[0] + 'EXE' +localtag]
 #########################################
@@ -26,7 +27,7 @@ for module in moduleNames:
         pass
     else:
         print 'is self'
-######################
+######################       
 import Mod_TicksUtile, Mod_ibutiles
 from ib.ext.Contract import Contract  
 from ib.opt import ibConnection, message

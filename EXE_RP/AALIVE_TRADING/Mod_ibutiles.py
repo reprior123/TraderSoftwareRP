@@ -18,6 +18,7 @@ for var in nd.keys():
 global timedate_format, nextorderID, date, today,recentlimit, time_format,sym, symbol_list, symdict
 moduleNames = open('importmodlist.txt').readlines()
 for module in moduleNames:
+##    print module
     if module != titleself:
         my_module = importlib.import_module(module.strip())
 ######################
@@ -61,6 +62,12 @@ def parse_tickSnapshot(snapshotmsgline):
         rpu_rp.WriteArrayToCsvfileAppend(fname,linearray)
 ###############################
 def create_contract(sym,strike,expiry):
+##    print symdict
+##    print typedict
+##    print exchdict
+##    print currdict
+##    print optrightdict
+##    print expiredict
     symib = symdict[sym] 
     ibsecType = typedict[sym] #'CASH'
     ibexchange = exchdict[sym] #'IDEALPRO'
@@ -84,6 +91,7 @@ def create_contract(sym,strike,expiry):
         sleep(1)
     return contract
 ###############################
+##create_contract('ES','1','1')
 def create_contractOPTION(sym,strike,expiry):
     symib = 'SPY'
     ibsecType = 'OPT' #typedict[sym] #'CASH'
