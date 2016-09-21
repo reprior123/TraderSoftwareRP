@@ -1,0 +1,44 @@
+SourceFeed,varchar,20
+AccountNumRoot,varchar,20
+DepotNum,varchar,20
+AcctRefCurr,varchar,20
+Side,varchar,20
+ValueDate,date,20
+SettleDate,date,20
+BookingDate,date,20
+midixISIN,varchar,20
+midixValor,varchar,20
+Quantity,float,14.2
+PriceTransaction,float,14.2
+CurrTrade,varchar,10
+CurrRateTrade,float,9.4
+FeesBank,float,14.2
+CurrFeesBank,float,14.2
+CurrRateFeesBank,float,14.2
+FeesExternal,float,14.2
+CurrFeesExternal,float,14.2
+CurrRateFeesExternal,float,14.2
+FeesTax,float,14.2
+CurrFeesTax,float,14.2
+CurrRateFeesTax,float,14.2
+TotalSettleAmtInTradeCurr,float,14.2
+TotalSettleAmtInPortfolioCurr,float,14.2
+OrderNum,varchar,20
+BookingNum,varchar,20
+StornoFlag,varchar,20
+CashFlowFlag,varchar,20
+BookingText2,varchar,20
+Storno,varchar,20
+DividendFlag [ yes/no],varchar,20
+OrderCreatedDate,date,date
+TIF,varchar,20
+OrderType [mkt/lim],varchar,20
+OrderSentDate,date,20
+recon_status_field,varchar,20
+limit_price,float,14.2
+rolotec id,varchar,20
+addfin_product_id,varchar,20
+joined_ISIN_TradeCurr,varchar,20
+OrderId,varchar,20
+PortfolioId,varchar,20
+joined_Bank_Acct1_acct2,varchar,20

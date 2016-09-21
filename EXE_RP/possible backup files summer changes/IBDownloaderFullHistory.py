@@ -1,4 +1,3 @@
-
 ################################
 import os, sys, importlib,glob, csv, subprocess, datetime, shutil, time
 from time import sleep, strftime, localtime
@@ -6,7 +5,6 @@ from datetime import datetime
 titleself = (os.path.basename(__file__)).replace('.pyc','')
 print titleself
 ###########
-
 
 localtag = '_RP'
 sys.path[0:0] = [((os.getcwd().replace('EXE','|')).split('|'))[0] + 'EXE' +localtag]
@@ -25,10 +23,11 @@ for module in moduleNames:
     if modulestripped != titleself:
 ##        print '...',modulestripped,'xxx',titleself
         my_module = importlib.import_module(modulestripped)
+        
         pass
     else:
         print 'is self'
-######################       
+######################
 import Mod_TicksUtile, Mod_ibutiles
 from ib.ext.Contract import Contract  
 from ib.opt import ibConnection, message
@@ -49,11 +48,12 @@ def reply_handler(msg):
     else:
         rpu_rp.WriteStringsToFileAppend(replyfname,str(msg))
         #########
+tempfnameroot =         'tempdlfiledaysall'
 #####################
 def historical_data_handler(msg):  
     global newDataList
-    sym = 'tempdlfileday1'
-    fname = DataDown+ today + '.' + sym +'.ddload.csv'
+##    sym = 'tempdlfiledaysall'
+    tempfname = DataDown+ today + '.' + tempfnameroot +'.ddload.csv'
     if ('finished' in str(msg.date)) == False:  ### keep building the list
         fstring = "%Y-%m-%d %H:%M:%S"
         dateold = localtime(int(msg.date))
@@ -64,10 +64,10 @@ def historical_data_handler(msg):
         newDataList = newDataList + [dataStr]  
     else:
         print 'next list'
-        rpu_rp.WriteStringsToFile(fname,'') #flush the file
+        rpu_rp.WriteStringsToFile(tempfname,'') #flush the file
         for a in newDataList:
             if len(a) > 2:
-                rpu_rp.WriteStringsToFileAppend(fname,a)
+                rpu_rp.WriteStringsToFileAppend(tempfname,a)
         newDataList = []
 ##########
 newDataList = []
@@ -92,8 +92,10 @@ def dload(symlist,barlist,strikelist,expirylist):
                     fname = DataDown+ today + '.' + sym + '.'  + bar.replace(' ','')+'.ddload.csv'
                     Mod_TicksUtile.backupTickfiles(fname)
                     ##########
-                    duration = bardict[bar]
-                    barspaced = bardictspaced[bar]
+##                    duration = bardict[bar]
+                    duration = bardictLong[bar]
+                    barspaced = bardictspacedLong[bar]
+                    
                     contract = Mod_ibutiles.create_contract(sym,strike,expiry)
                     ticktype = ticktypedict[sym]
                     print bar, sym, duration,ticktype, barspaced, strike, expiry
@@ -101,7 +103,7 @@ def dload(symlist,barlist,strikelist,expirylist):
                     trans_id = trans_id + 1  
                     sleep(20)
                     
-                    tmp = DataDown+ today + '.' + 'tempdlfileday1' + '.ddload.csv'
+                    tmp = DataDown+ today + '.' + tempfnameroot + '.ddload.csv'
                     fname = DataDown+ today + '.' + sym + '.'  + bar+'.ddload.csv'
                     shutil.copyfile(tmp,fname)
                     Mod_TicksUtile.throw_out_lastbar(fname)
@@ -117,8 +119,8 @@ else:
 ############
 doallbars = 'y' # raw_input('do all bars? ')
 if doallbars == 'y':
-##    blist = ['5secs','1min','3mins','5mins','15mins','1hour','1day'] #barlist_Allw5sec
-    blist = ['1day'] #barlist_Allw5sec
+    blist = ['5secs','1min','3mins','5mins','15mins','1hour','1day'] #barlist_Allw5sec
+##    blist = ['1day'] #barlist_Allw5sec
 ##    blist = ['5secs','1min','3mins','5mins','15mins','1hour'] #barlist_Allw5sec
 else:
     bartodo = raw_input('enter bar here ..eg. 1min ')

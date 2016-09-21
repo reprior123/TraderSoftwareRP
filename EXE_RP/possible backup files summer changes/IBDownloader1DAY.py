@@ -1,4 +1,3 @@
-
 ################################
 import os, sys, importlib,glob, csv, subprocess, datetime, shutil, time
 from time import sleep, strftime, localtime
@@ -6,7 +5,6 @@ from datetime import datetime
 titleself = (os.path.basename(__file__)).replace('.pyc','')
 print titleself
 ###########
-
 
 localtag = '_RP'
 sys.path[0:0] = [((os.getcwd().replace('EXE','|')).split('|'))[0] + 'EXE' +localtag]
@@ -25,10 +23,11 @@ for module in moduleNames:
     if modulestripped != titleself:
 ##        print '...',modulestripped,'xxx',titleself
         my_module = importlib.import_module(modulestripped)
+        
         pass
     else:
         print 'is self'
-######################       
+######################
 import Mod_TicksUtile, Mod_ibutiles
 from ib.ext.Contract import Contract  
 from ib.opt import ibConnection, message
@@ -72,7 +71,7 @@ def historical_data_handler(msg):
 ##########
 newDataList = []
 print 'connecting hdownload flex'
-tws_conn = Connection.create(port=7496, clientId=122)
+tws_conn = Connection.create(port=7496, clientId=182)
 tws_conn.connect()
 tws_conn.register(Mod_ibutiles.error_handler, 'Error')
 tws_conn.registerAll(reply_handler)

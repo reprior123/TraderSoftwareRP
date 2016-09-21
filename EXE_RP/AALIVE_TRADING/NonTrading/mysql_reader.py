@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+
 import MySQLdb
 from os import getenv
 ##import pymssql
@@ -55,8 +56,7 @@ print "Database version : %s " % data
 
 # disconnect from server
 db.close()
-
-
+#############################
 
 ##sql = 'SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE=\'BASE TABLE\''
 sql = 'SELECT sql  FROM sqlite_master WHERE type=\'table\''
@@ -72,8 +72,6 @@ for l in arr:
 ##    for line in conn.iterdump():
 ##        f.write('%s\n' % line)
 ##        print line
-
-
 
 import sqlite3
 import pandas as pd
