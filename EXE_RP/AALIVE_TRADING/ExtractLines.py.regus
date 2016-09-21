@@ -247,8 +247,6 @@ wbfile = libarea +'SpotsFull.' + sym +'.txt'
 ##osCommandString = 'notepad.exe ' + wbfile 
 ##os.system(osCommandString)
 
-=======
->>>>>>> fc13e6bcf983aa9f13e3d7bcaa717effe659ff5d
 import os, sys
 localtag = '_RP'
 sys.path[0:0] = [((os.getcwd().replace('EXE','|')).split('|'))[0] + 'EXE' +localtag]
@@ -505,3 +503,49 @@ osCommandString = 'notepad.exe ' + wbfile
 ##osCommandString = 'cat ' + wbfile 
 os.system(osCommandString)
 
+
+'''
+diff --cc EXE_RP/AALIVE_TRADING/ExtractLines.py
+index 63e1df2,bba62fa..0000000
+--- a/EXE_RP/AALIVE_TRADING/ExtractLines.py
++++ b/EXE_RP/AALIVE_TRADING/ExtractLines.py
+@@@ -67,18 -69,21 +67,29 @@@ def extract_wbmails(myusername,mypasswo
+          print email_message['From'],email_message['Subject']
+          bla = multibody(email_message)
+          rpu_rp.WriteStringsToFile('BlountNewEmail.txt',bla)
+ -
+++##<<<<<<< HEAD
+++##=======
+++##
+++##>>>>>>> 19e75e22e060800993a3bcc20cd86a6d050270f3
+
+  ########################
+  username = 'reprior123@gmail.com'
+  mypassword = 'bla'
+  mypassword = raw_input('pw here: ')
+  extract_wbmails(username,mypassword)
++
++ ##raw_input('remember to add weekly pivot...')
++ wbfile = 'BlountNewEmail.txt'
++ osCommandString = 'notepad.exe ' + wbfile
++ ##osCommandString = 'cat ' + wbfile
++ ##os.system(osCommandString)
++
+  ######################
+ +raw_input('remember to add weekly pivot...')
+ +wbfile = 'BlountNewEmail.txt'
+ +osCommandString = 'notepad.exe ' + wbfile
+ +os.system(osCommandString)
+ +####################
+  def convert_emailtolines():
+      wbfile = downloads +'BlountNewEmail.txt'
+      wbfile = 'BlountNewEmail.txt'
+
+RobAdmin@base03 MINGW64 /c/GITTRADERRP/TraderSoftwareRP (master|MERGING)
+$ git rm EXE_RP/AALIVE_TRADING/ExtractLines.py
+EXE_RP/AALIVE_TRADING/ExtractLines.py: needs merge
+rm 'EXE_RP/AALIVE_TRADING/ExtractLines.py'
+
+RobAdmin@base03 MINGW64 /c/GITTRADERRP/TraderSoftwareRP (master|MERGING)
+
+'''
