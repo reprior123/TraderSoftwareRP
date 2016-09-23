@@ -22,13 +22,16 @@ global  sym, symbol_list, symdict
 heredir = os.getcwd()
 print heredir
 newfile = downloads +'suitecrm modulebuilder TransEXT - Sheet5.csv'
-newfile = heredir + '/fieldsin.csv'
+newfile = downloads + 'Untitled spreadsheet - Sheet1 (1).csv' #'fields list WIP new Suitecrm - DB_productsRolotec.csv'
+
+#newfile = heredir + '/fieldsin.csv'
 import fileinput
 
 lines = rpu_rp.CsvToLines(newfile)
 
 typelable = 'addfin'
 typelable = 'addfin'
+typelable2 = 'tx'
 typelablenew = 'tx'
 modulename ='TransEXT'
 mnamelower = modulename.lower()
@@ -38,14 +41,51 @@ print '$dictionary[\'' + modulename + '\'] = array( \n\
                 \'duplicate_merge\'=>true,\n\
                 \'fields\'=>array (\n\
 '
+lablearray =[]
 for l in lines: 
-    if l[1] != typelable:
-        newf = typelablenew +'_'+l[0]
-        ftype = l[1]
-        flen = l[2]
+    if l[0] != 'ggggggg':
+        floatprec =''
+        prefix = l[2]
+        fname = l[1]
+        fullname = prefix + '_' + fname
+        fulldesc = l[3]
+        ftype = fulldesc.split('(')[0]
         if ftype == 'float':
-            flen = l[2].split('.')[0]
-            precision = l[2].split('.')[1]
+            floatval ='15'
+            floatprec = '4'
+            flen='19'
+            pass
+        elif ftype =='varchar':
+            flen = '40'
+            pass
+        elif ftype == 'integer':
+            flen ='9'
+            pass
+        else:
+            flen =''
+##        floatarea = (fulldesc.split('(')[1])
+##        if len(floatarea) > 1 or ftype !='date':
+##            if len(floatarea.split('.')) >1 :
+##                floatval = floatarea.split('.')[0]
+##                floatprec = floatarea.split('.')[1]
+##            else:
+##                floatval = '1'
+##                floatprec = '0'
+##        else:
+##            floatval = '1'
+##            floatprec = '0'            
+
+##        if len(ftype) > 1 :
+##            print 'bigger'
+##            precision = (fulldesc.split('(')[1]).split('.')[1].replace(')','')
+##        else:
+##            precision = '1'
+##        
+        newf = fullname
+
+##        if ftype == 'float':
+####            flen = l[2].split('.')[0]
+####            precision = l[2].split('.')[1]
 
         print '\''+newf +'\''+ '=> array('
         print '\'name\' => ' +  '\''+newf +'\','
@@ -55,7 +95,7 @@ for l in lines:
             flen = '11'
             size = '20'
             print '\'size\' => ' +  '\''+ size +'\','
-            print '\'precision\' => ' +  '\''+ precision +'\','
+            print '\'precision\' => ' +  '\''+ floatprec +'\','
         print '\'vname\' => ' +  '\'LBL_DB_PROD_'+newf.upper() +'\','
         print '\'len\' => ' +  '\''+ flen +'\','
 
@@ -69,11 +109,10 @@ for l in lines:
         print '\'reportable\' => true,'
 
         print '),'
-
-for l in lines:
-    if l[1] != typelable:
-        newf = typelablenew + '_'+l[0]
-        print '\'LBL_DB_PROD_'+newf.upper()  +'\''+ ' => \'' + newf.replace('_',' ') +'\','
+        lablearray.append('\'LBL_DB_PROD_'+newf.upper()  +'\''+ ' => \'' + newf.replace('_',' ') +'\',')
+        
+for  l in lablearray:
+    print l
         #print '\'LBL_'+newf.upper()  +'\''+ ' => \'' + newf.replace('_',' ') +'\','
 '''
  'lng' =>
