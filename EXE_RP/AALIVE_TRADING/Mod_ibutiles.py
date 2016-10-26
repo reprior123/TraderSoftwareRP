@@ -73,6 +73,8 @@ def create_contract(sym,strike,expiry):
     ibexchange = exchdict[sym] #'IDEALPRO'
     cashcurr = currdict[sym] #'USD'
     right = optrightdict[sym] #'ignore'
+    print 'this is the contract as loaded from Mod_ibutiles'
+##    print 'expiry is ....',expiry
     print symib,ibsecType,ibexchange,cashcurr,expiry,strike,right
     contract = Contract()  
     contract.m_symbol = symib
@@ -81,6 +83,7 @@ def create_contract(sym,strike,expiry):
     contract.m_currency = cashcurr
     if ibsecType  == 'FUT':
         expiry = expiredict[sym]
+        print 'item is FUT and expiry = ...',expiry
         contract.m_expiry = expiry
         contract.m_tradingClass = sym
     if ibsecType  == 'OPT':

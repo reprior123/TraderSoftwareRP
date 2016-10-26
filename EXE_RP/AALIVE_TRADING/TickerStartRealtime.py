@@ -14,6 +14,7 @@ nd = ENVdicts.ENVdicts(localtag)
 
 
 
+
 for var in nd.keys():
 ##    print var
     locals()[var] = nd[var]
@@ -172,7 +173,7 @@ if restartstatus== 'partial':
     import IBDownloaderShortTerms
     pass
 else:    
-    import IBDownloader
+    import IBDownloaderGOOD
 ###############
 while loop < loopmax:
     ## process single files into recent file ##

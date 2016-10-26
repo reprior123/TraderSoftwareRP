@@ -5,8 +5,6 @@ from datetime import datetime
 titleself = (os.path.basename(__file__)).replace('.pyc','')
 print titleself
 ###########
-
-
 localtag = '_RP'
 sys.path[0:0] = [((os.getcwd().replace('EXE','|')).split('|'))[0] + 'EXE' +localtag]
 #########################################
@@ -27,7 +25,7 @@ for module in moduleNames:
         pass
     else:
         print 'is self'
-######################       
+######################
 import Mod_TicksUtile, Mod_ibutiles
 from ib.ext.Contract import Contract  
 from ib.opt import ibConnection, message
@@ -36,7 +34,7 @@ from ib.opt import Connection, message   #
 ############################################
 global  sym, fname, barlist, bar
 ####################################
-fname = DataDown+ today + '.' + 'tempdlfileday1' +'.ddload.csv'
+fname = DataDown+ today + '.' + 'tempdlfile' +'.ddload.csv'
 rpu_rp.WriteStringsToFile(fname,'') #flush the file
 replyfname = TMP + 'replysdloader.csv'
 def reply_handler(msg):
@@ -51,7 +49,7 @@ def reply_handler(msg):
 #####################
 def historical_data_handler(msg):  
     global newDataList
-    sym = 'tempdlfileday1'
+    sym = 'tempdlfile'
     fname = DataDown+ today + '.' + sym +'.ddload.csv'
     if ('finished' in str(msg.date)) == False:  ### keep building the list
         fstring = "%Y-%m-%d %H:%M:%S"
@@ -71,7 +69,7 @@ def historical_data_handler(msg):
 ##########
 newDataList = []
 print 'connecting hdownload flex'
-tws_conn = Connection.create(port=7496, clientId=122)
+tws_conn = Connection.create(port=7496, clientId=125)
 tws_conn.connect()
 tws_conn.register(Mod_ibutiles.error_handler, 'Error')
 tws_conn.registerAll(reply_handler)
@@ -100,7 +98,7 @@ def dload(symlist,barlist,strikelist,expirylist):
                     trans_id = trans_id + 1  
                     sleep(20)
                     
-                    tmp = DataDown+ today + '.' + 'tempdlfileday1' + '.ddload.csv'
+                    tmp = DataDown+ today + '.' + 'tempdlfile' + '.ddload.csv'
                     fname = DataDown+ today + '.' + sym + '.'  + bar+'.ddload.csv'
                     shutil.copyfile(tmp,fname)
                     Mod_TicksUtile.throw_out_lastbar(fname)
@@ -116,9 +114,8 @@ else:
 ############
 doallbars = 'y' # raw_input('do all bars? ')
 if doallbars == 'y':
-##    blist = ['5secs','1min','3mins','5mins','15mins','1hour','1day'] #barlist_Allw5sec
-    blist = ['1day'] #barlist_Allw5sec
-##    blist = ['5secs','1min','3mins','5mins','15mins','1hour'] #barlist_Allw5sec
+    blist = ['5secs','1min','3mins','5mins','15mins','1hour','1day'] #barlist_Allw5sec
+    blist = ['5secs','1min','3mins','5mins','15mins','1hour'] #barlist_Allw5sec
 else:
     bartodo = raw_input('enter bar here ..eg. 1min ')
     blist = [bartodo]

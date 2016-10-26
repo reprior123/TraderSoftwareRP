@@ -11,6 +11,7 @@ sys.path[0:0] = [((os.getcwd().replace('EXE','|')).split('|'))[0] + 'EXE' +local
 import ENVdicts,rpu_rp 
 nd ={}
 nd = ENVdicts.ENVdicts(localtag)
+
 for var in nd.keys():
 ##    print var
     locals()[var] = nd[var]
@@ -18,8 +19,15 @@ for var in nd.keys():
 global timedate_format, nextorderID, date, today,recentlimit, time_format,sym, symbol_list, symdict
 moduleNames = open('importmodlist.txt').readlines()
 for module in moduleNames:
-    if module != titleself:
-        my_module = importlib.import_module(module.strip())
+    modulestripped = module.strip()
+    if modulestripped != titleself:
+##        print '...',modulestripped,'xxx',titleself
+        my_module = importlib.import_module(modulestripped)
+        pass
+    else:
+        print 'is self'
+######################
+import Mod_TicksUtile
 ######################
 ##############################
 symbol_list = symdict.keys()
@@ -52,7 +60,7 @@ def snapshot_sym(sym,today,durslist):
     text = []
     barlist = ['1min', '3mins', '5mins', '15mins', '1hour']
     basisfile = DataDown +today+'.'+sym+'.'+'5secs'+'.both.csv'
-    TicksUtile.assemble_dur_bars(today,sym,'1hour','initial',basisfile)
+    Mod_TicksUtile.assemble_dur_bars(today,sym,'1hour','initial',basisfile)
     posstate = rpInd.ShowRecentPositionState(sym)
     text.append(posstate + sym )
     threshold =0.0
@@ -70,7 +78,7 @@ def snapshot_sym(sym,today,durslist):
         basisdur = '5secs'
         startmode ='initialize'
         basisfile = DataDown +today+'.'+sym+'.'+basisdur+'.both.csv'
-        TicksUtile.assemble_dur_bars(today,sym,dur,startmode,basisfile)
+        Mod_TicksUtile.assemble_dur_bars(today,sym,dur,startmode,basisfile)
 ### this relys on the sig creator to assemble each time
         rpInd.create_states_files(sym,dur,today,threshold,indlist)
         indlist = ['mcross']
@@ -115,8 +123,8 @@ def show_one_bar(sym,dur,bartime,date):
 ###########################
 def show_bar_range(sym,dur,startbartime,endbartime,date):
     datehyphen = rpu_rp.todaysdatehypens(date)
-    startbartime = TicksUtile.time_to_epoch(datehyphen + startbartime)
-    endbartime = TicksUtile.time_to_epoch(datehyphen + endbartime)
+    startbartime = Mod_TicksUtile.time_to_epoch(datehyphen + startbartime)
+    endbartime = Mod_TicksUtile.time_to_epoch(datehyphen + endbartime)
     stem = '.'+dur +'.both.csv'
     if dur == 'RTicks':
         stem = '.RTticks.csv'
@@ -126,7 +134,7 @@ def show_bar_range(sym,dur,startbartime,endbartime,date):
     for bar in bars:
         if len(bar) > 2:
 ##            print bar,'is bar'
-            curbartime = TicksUtile.time_to_epoch(bar[1])
+            curbartime = Mod_TicksUtile.time_to_epoch(bar[1])
             if curbartime > startbartime and curbartime < endbartime:
                 newbars.append(bar)
 ##    for b in newbars:
@@ -143,7 +151,7 @@ def show_hi_lo_bar_range(sym,dur,startbartime,endbartime,date):
     newbars = show_bar_range(sym,dur,startbartime,endbartime,date)
     for bar in newbars:
         if len(bar) > 2:
-            curbartime = TicksUtile.time_to_epoch(bar[1])
+            curbartime = Mod_TicksUtile.time_to_epoch(bar[1])
             lowprice = float(bar[4])
             hiprice = float(bar[3])
             clsprice = float(bar[5])

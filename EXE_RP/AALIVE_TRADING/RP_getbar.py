@@ -1,37 +1,56 @@
-import os, sys
+################################
+import os, sys, importlib,glob, csv, subprocess, datetime, shutil, time
+from time import sleep, strftime, localtime
+from datetime import datetime
+titleself = (os.path.basename(__file__)).replace('.pyc','')
+print titleself
+###########
 localtag = '_RP'
-path = os.getcwd() + '/'
-rootpath = ((path.replace('EXE','|')).split('|'))[0]
-EXEnoslash = rootpath + 'EXE_RP'
-sys.path[0:0] = [rootpath + 'EXE_RP']
+sys.path[0:0] = [((os.getcwd().replace('EXE','|')).split('|'))[0] + 'EXE' +localtag]
 #########################################
-import ENVvars
-nd ={}
-nd = ENVvars.ENVvars(localtag)
-##resolve vardict back to normal variables
-for var in nd.keys():
-    locals()[var] = nd[var]
-#######################################
-import ENVdicts
+import ENVdicts,rpu_rp 
 nd ={}
 nd = ENVdicts.ENVdicts(localtag)
+
 for var in nd.keys():
 ##    print var
     locals()[var] = nd[var]
 ##################
+global timedate_format, nextorderID, date, today,recentlimit, time_format,sym, symbol_list, symdict
+moduleNames = open('importmodlist.txt').readlines()
+for module in moduleNames:
+    modulestripped = module.strip()
+    if modulestripped != titleself:
+##        print '...',modulestripped,'xxx',titleself
+        my_module = importlib.import_module(modulestripped)
+        pass
+    else:
+        print 'is self'
+######################
+import Mod_TicksUtile
+######################
+sym = 'ES'
+date =  today  ######## <<<<<<<
+print '1 : ES \n2 : FDAX'
+symnum = '1' #raw_input('sym: ')
+if symnum == '1':
+    sym = 'ES'
+else:
+    sym = 'FDAX'
+for ind in indlist_oscils:
+    dur = '5mins'
+teststr = 'grnNnotailNbigbar' #'2016-02-19 21:'
+closestr = 'grnNnotailN'
+pos = netcost = 0
 ####################
 global recentlimit, time_format,today,timedate_format, nextorderID
 from time import sleep, strftime, localtime
-import  rpu_rp, rpInd, ibutiles, TicksUtile, RP_Snapshot, glob, csv, subprocess, datetime, shutil, time
-from datetime import datetime
-from time import sleep
-import  rpu_rp, rpInd, TicksUtile,BarUtiles
 import ctypes
 date = yesterday
 #####################3
-##########    pivot = rpInd.gatherline(sym,'pivot')
-##########    R1 = rpInd.gatherline(sym,'R1')
-##########    S1 = rpInd.gatherline(sym,'S1')
+##########    pivot = Mod_Mod_rpInd.gatherline(sym,'pivot')
+##########    R1 = Mod_Mod_rpInd.gatherline(sym,'R1')
+##########    S1 = Mod_Mod_rpInd.gatherline(sym,'S1')
 ##########    print S1,R1,pivot
     ##do the same for weekly by adding dur to variables and create a weekly  from dailys..
 ##    find pivots, find fibbo retraces on recnt moves[rangebars,hi,lo]
@@ -39,8 +58,6 @@ date = yesterday
 ##    calculate two roundies
 ##    calculate 10 handles off high of day,lowday,openday,yestclose,prevhourhilow
 #############################################
-##########################
-import RP_Snapshot
 print '   '
 sym = 'ES'      
 ###############
@@ -68,9 +85,9 @@ print todaydash
 bla =str(todaydash)
 def get_info(date):
     todayhyphen = rpu_rp.todaysdatehypens(date)
-##    RP_Snapshot.snapshot_sym(sym,date,['5mins']) ## need this to create good both bars ## 
+##    Mod_Mod_Mod_Mod_RP_Snapshot.snapshot_sym(sym,date,['5mins']) ## need this to create good both bars ## 
     btime = '15:30:0'
-    RP_Snapshot.show_one_bar('ES','1min',btime,date)
+    Mod_RP_Snapshot.show_one_bar('ES','1min',btime,date)
     ###############
     ############
     regionlist = ['USA','EUROPE','ASIA']
@@ -92,13 +109,13 @@ def get_info(date):
 
 ######################
 def scan_bars_for_tag(bars,price,sym,start,end,date):
-    bars = RP_Snapshot.show_bar_range(sym,'5mins',start,end,date)
+    bars = Mod_Mod_Mod_Mod_RP_Snapshot.show_bar_range(sym,'5mins',start,end,date)
     for bar in bars:
         print bar
         ## check if line price has been tagged
 #############################
 def detect_sliceDice(lineprice,start,end):
-    bars = RP_Snapshot.show_bar_range(sym,'5mins',start,end,date)
+    bars = Mod_Mod_Mod_Mod_RP_Snapshot.show_bar_range(sym,'5mins',start,end,date)
 
     startprice = float(head(bars)[6])
     if startprice <  lineprice :
@@ -118,7 +135,7 @@ def detect_sliceDice(lineprice,start,end):
                 pass
 ######################
 def OBV(date,sym):
-##    bars = RP_Snapshot.show_bar_range(sym,'5mins',start,end,date)
+##    bars = Mod_Mod_Mod_Mod_RP_Snapshot.show_bar_range(sym,'5mins',start,end,date)
     ticks = bars
 ######bs = [1,2,6,6,5,6,7,8,9]
 ######bshighs = [1,2,13,4,5,6,7,8,9]
@@ -139,9 +156,9 @@ def find_swing_points(sym,barsize,start,end,mode,threefive):
     else:
         highnum = 3
         lownum = 4
-    import RP_Snapshot
+    import Mod_Mod_Mod_Mod_RP_Snapshot
     barsdaily =[]
-    bars = RP_Snapshot.show_bar_range(sym,barsize,start,end,date)
+    bars = Mod_Mod_Mod_Mod_RP_Snapshot.show_bar_range(sym,barsize,start,end,date)
     prevhigh = 0.0
     prevlow = 9999
     prevprevlow = 9999
@@ -191,9 +208,9 @@ def find_swing_points5(sym,barsize,start,end,mode,threefive):
     else:
         highnum = 3
         lownum = 4
-    import RP_Snapshot
+    import Mod_Mod_Mod_Mod_RP_Snapshot
     barsdaily =[]
-    bars = RP_Snapshot.show_bar_range(sym,barsize,start,end,date)
+    bars = Mod_Mod_Mod_Mod_RP_Snapshot.show_bar_range(sym,barsize,start,end,date)
     b1low = b2low = b3low =  b4low = 9999
     b1high = b2high =  b3high = b4high  = 0
     b1time = b2time =  b3time = b4time  = ''
@@ -279,7 +296,7 @@ def linetagger(spotline,sym):
 '''
 #################################
 def show_spots(sym,date,limit):
-    curprice = float(TicksUtile.recenttick(sym,'recent'))
+    curprice = float(Mod_TicksUtile.recenttick(sym,'recent'))
     spotfile = libarea + 'spotlines.' + sym+ '.csv'
     spotlines= rpu_rp.CsvToLines(spotfile)
     print limit, ' is limit'
@@ -299,7 +316,7 @@ def show_spots(sym,date,limit):
 #####################
 def show_bar8_range(start,end,sym,date):
     print 'this is the bar8 range of lines',start,end
-    after5lines = RP_Snapshot.show_bar_range(sym,'5mins',start,end,date)
+    after5lines = Mod_Mod_Mod_Mod_RP_Snapshot.show_bar_range(sym,'5mins',start,end,date)
     linecount =0
     trigger = 'inactive'
     for line in after5lines:
@@ -330,8 +347,8 @@ def run_8s(sym):
         show_bar8_range('16:00:10','18:25:00',sym,date) #usa
 ###############################
 def getslices(sym,barsize,start,end,date,slicesize):
-    import RP_Snapshot
-    bars = RP_Snapshot.show_bar_range(sym,barsize,start,end,date)
+    import Mod_RP_Snapshot
+    bars = Mod_RP_Snapshot.show_bar_range(sym,barsize,start,end,date)
     lenbars =len(bars)
     c=0
     while c < (lenbars - slicesize +1 ):
