@@ -31,6 +31,46 @@ date =  yesterday # today
 ##    calculate two roundies
 ##    calculate 10 handles off high of day,lowday,openday,yestclose,prevhourhilow
 #############################################
+######need to create and add labels...
+##then create tpl files
+webroot='c:/HIGHVOL/highvol/webroot/'
+ 
+stepnum='1'
+outfile = 'step'+stepnum +'bla.tpl.php'
+templatemodelfile = 'templatestep.tpl.php'
+labelsfile =webroot +'custom/Extension/application/Ext/Language/en_us.CR_ComplianceCenter.php'
+
+
+def extract_lbltags(filein):
+    lines = rpu_rp.CsvToLines(filein)
+    for l in lines:
+##        print l
+        ["$app_strings['LBL_CR_NO'] = 'No';"]
+        
+        lsplit=str(l).split('\'')
+        if len(lsplit) >3:
+            tag=lsplit[1]
+            text=lsplit[3]
+            print tag
+            print text
+        
+        pass
+    pass
+extract_lbltags(labelsfile)
+###########################
+##["$app_strings['LBL_CR_NO'] = 'No';"]
+##<p><b>{$APP.LBL_CR_ASSETS}:</b><br><br>   line for questionheader
+##nextline is the questiontag
+
+fieldname found 
+#:$app_strings['LBL_CR_UP_TO'] = 'Up to';
+def lookup_lable(lable,filein):
+    lines = rpu_rp.CsvToLines(filein)
+    for l in lines:
+        if lable == l[2]:
+            print l[4]
+lable= 'LBL_CR_UP_TO'
+lookup_lable(lable,labelsfile)
 
 ###############
 def prepare_imp_file(filein,fileout):
@@ -38,26 +78,26 @@ def prepare_imp_file(filein,fileout):
     lines = rpu_rp.CsvToLines(filein)
     headerline =['Action', 'Quantity', 'Symbol', 'TimeInForce', 'SecType', 'OrderType', 'LmtPrice', 'Exchange', 'Currency', 'CUSIP', 'ISIN', '']
     headerline =['name', 'roloid', 'isin', 'sugarid', 'tradedcurr', 'assetclass','sector']
+    headerline =['module','resultmodule','QorA','QuestionNum','AnswerNum','AnswerScore','ScoreMethod','PrivateORGRelevant','QAType','QtextID','	English','German','French','notes']
     newlines.append(headerline)
     for l in lines:
+##        print l
         newline =[]
         newlinebla =[]
-        isin = l[11]
-        roloid = l[10]
-        name = l[0]
-        sugarid = l[1]
-        valor = l[23]
-        tradedcurr = l[29]
-        exchname = l[40]
-        assetclass = l[57]
-        sector = l[59]
+        isin = l[1]
         c=0
-        for i in  headerline:
-            newvar=locals()[i]
-            if newvar=='isin':
-                print newvar
-            newline.append(newvar)
+        for i in  headerline:           
+            locals()[i] = l[c]
+            if locals()[i] == 'Q' and c==2:
+                print i,locals()[i]
+##                print l
+                qtextid = l[9]
+                print qtextid
+                newvar=locals()[i]
+                newline.append(newvar)
+            c+=1
         newlines.append(newline)
+        
     rpu_rp.WriteArrayToCsvfile(fileout,newlines)
 #############
-prepare_imp_file(downloads+'bla.csv',downloads +'fileout.csv')
+##prepare_imp_file(downloads+'GII Questions and scoring - Questions.csv',downloads +'fileoutgii.csv')
