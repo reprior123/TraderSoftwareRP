@@ -33,45 +33,109 @@ date =  yesterday # today
 #############################################
 ######need to create and add labels...
 ##then create tpl files
-webroot='c:/HIGHVOL/highvol/webroot/'
- 
-stepnum='1'
+locationtag='GITHIGHVOL'
+webroot='c:/' +locationtag + '/highvol/webroot/'
+tplarea= webroot+'modules/CR_GII/tpls/investor_workflow/'
+stepnum='4'
+tplfile = tplarea +'step-'+stepnum+'.tpl'
 outfile = 'step'+stepnum +'bla.tpl.php'
 templatemodelfile = 'templatestep.tpl.php'
 labelsfile =webroot +'custom/Extension/application/Ext/Language/en_us.CR_ComplianceCenter.php'
-
-
-def extract_lbltags(filein):
+##C:\GITHUB\addfin-latest\addfin-sugar\webroot\
+def extract_lbltags(filein,mode,search):
     lines = rpu_rp.CsvToLines(filein)
+    tag=text=''
     for l in lines:
 ##        print l
-        ["$app_strings['LBL_CR_NO'] = 'No';"]
-        
+##        ["$app_strings['LBL_CR_NO'] = 'No';"]       
         lsplit=str(l).split('\'')
         if len(lsplit) >3:
             tag=lsplit[1]
             text=lsplit[3]
-            print tag
-            print text
-        
-        pass
-    pass
-extract_lbltags(labelsfile)
+        if mode == 'all':
+            print tag, '>>>',text
+            pass
+        else:
+            if search == tag:
+                print tag, text
+                pass
+            else:
+                pass
+mode='search'
+mode='all'
+lable= 'LBL_CR_UP_TO'
+lable='LBL_CR_SURROUNDINGS'
+search = lable
+extract_lbltags(labelsfile,mode,search)
 ###########################
+def revise_tpl_file(filein,mode,search,replacer):
+    lines = rpu_rp.TxtToLines(filein)
+    tag=text=''
+    for l in lines:
+##        print l
+        lsplit=str(l).split('\'')
+        if len(lsplit) >3:
+            tag=lsplit[1]
+            text=lsplit[3]
+        if mode == 'all':
+            print tag, '>>>',text
+            pass
+        elif mode == 'replace':
+            tag1=search
+            tag2=replacer
+            newl = str(l).replace(tag1,tag2)
+            print newl
+            pass
+        elif mode == 'grep':
+            tag1=search
+            tag2=replacer
+            newl = str(l).replace(tag1,tag2)
+            if search in str(l) or replacer in str(l):
+                print l
+            pass
+        else:
+            pass
+mode='replace'
+mode='grep'
+search = lable
+search = 'radio'
+search = '<'
+replacer ='LBL'
+##search = 'LBL_CR_INVESTOR_PROFILE'
+replacer ='LBL_CR_INVESTOR_PROFILE.NEW'
+for c in range(1,9):
+    stepnum=str(c)
+    print '>>>>>>>>>>>      ',stepnum, '     >>>>>>>>>'
+    tplfile = tplarea +'step-'+stepnum+'.tpl'
+    revise_tpl_file(tplfile,mode,search,replacer)
+######################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ##["$app_strings['LBL_CR_NO'] = 'No';"]
 ##<p><b>{$APP.LBL_CR_ASSETS}:</b><br><br>   line for questionheader
 ##nextline is the questiontag
-
-fieldname found 
+##fieldname found 
 #:$app_strings['LBL_CR_UP_TO'] = 'Up to';
-def lookup_lable(lable,filein):
-    lines = rpu_rp.CsvToLines(filein)
-    for l in lines:
-        if lable == l[2]:
-            print l[4]
-lable= 'LBL_CR_UP_TO'
-lookup_lable(lable,labelsfile)
-
 ###############
 def prepare_imp_file(filein,fileout):
     newlines =[]

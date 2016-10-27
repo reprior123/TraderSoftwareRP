@@ -9,14 +9,12 @@ for var in nd.keys():
 ##    print var
     locals()[var] = nd[var]
 ##################
-
 #TicksUtile, RP_Snapshot,
 import glob, csv, subprocess, datetime, shutil, time
 from time import sleep, strftime, localtime
 from datetime import datetime
 import ctypes
 ################
-import imaplib, time, email
 ####################
 import rpu_rp
 ####################
@@ -31,10 +29,14 @@ date =  yesterday # today
 ##    calculate two roundies
 ##    calculate 10 handles off high of day,lowday,openday,yestclose,prevhourhilow
 #############################################
-
 assetlist=['Equities','Commodities', 'Real Estate']
 for a in assetlist:
     print a
+    word='Knowledge'
+    word='Experience' # use lables here
+    
+    question =  'rate the following 1=Expert '+word+', 2=Some'+word+', 3=No '+word
+    print question
 ###############
 def prepare_imp_file(filein,fileout):
     newlines =[]
@@ -45,15 +47,6 @@ def prepare_imp_file(filein,fileout):
     for l in lines:
         newline =[]
         newlinebla =[]
-        isin = l[11]
-        roloid = l[10]
-        name = l[0]
-        sugarid = l[1]
-        valor = l[23]
-        tradedcurr = l[29]
-        exchname = l[40]
-        assetclass = l[57]
-        sector = l[59]
         c=0
         for i in  headerline:
             newvar=locals()[i]
