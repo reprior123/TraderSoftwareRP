@@ -11,10 +11,6 @@ sys.path[0:0] = [((os.getcwd().replace('EXE','|')).split('|'))[0] + 'EXE' +local
 import ENVdicts,rpu_rp 
 nd ={}
 nd = ENVdicts.ENVdicts(localtag)
-
-
-
-
 for var in nd.keys():
 ##    print var
     locals()[var] = nd[var]
@@ -28,6 +24,7 @@ for module in moduleNames:
     if modulestripped != titleself:
 ##        print '...',modulestripped,'xxx',titleself
         my_module = importlib.import_module(modulestripped)
+        print 'importing ...',modulestripped,'prob does not work..'
         pass
     else:
         print 'is self'
@@ -81,46 +78,29 @@ onerow =[]
 timenow = datetime.now().time().isoformat()
 ################
 def reply_handler(msg):
+    if msg.typeName == 'realtimeBar' or msg.typeName == 'updateMktDepth' or msg.typeName == 'tickPrice' or msg.typeName == 'tickSize' or msg.typeName == 'tickString':
+            msgarray = (str(msg)).split()
+            reqid=(msgarray[1]).split('=')[1].replace(',','')
+            sym=symTickerIddict[reqid]
+            onerow = (str(msg)).split(',')
+            timenow= datetime.now().time().isoformat()
+            ticktime = timenow.replace(':','').replace('.','')
     if msg.typeName == 'realtimeBar':
-        msgarray = (str(msg)).split()
-        reqid=(msgarray[1]).split('=')[1].replace(',','')
-        sym=symTickerIddict[reqid]
-        onerow = (str(msg)).split(',')
-        timenow= datetime.now().time().isoformat()
-        ticktime = timenow.replace(':','').replace('.','')
         fname = DataDown+ today + '.' + sym  +'.rtimebar.' + ticktime+'.txt'
         cleanonerow = Mod_TicksUtile.clean_RTTick5secBars(onerow,sym)
         rpu_rp.WriteArrayToCsvfile(fname,[cleanonerow])
         rpu_rp.WriteArrayToCsvfile(DataDown +today+'.'+sym+ '.RTtickslastquote.csv',[cleanonerow])
     elif msg.typeName == 'updateMktDepth':
-        msgarray = (str(msg)).split()
-        reqid=(msgarray[1]).split('=')[1].replace(',','')
-        sym=symTickerIddict[reqid]
-        onerow = (str(msg)).split(',')
-        timenow= datetime.now().time().isoformat()
-        ticktime = timenow.replace(':','').replace('.','')
         fname = DataDown+ today + '.' + sym  +'.rtDOMbar.' + ticktime+'.txt'
         cleanonerow = Mod_TicksUtile.clean_rtDOMbar(onerow,sym)
         rpu_rp.WriteArrayToCsvfile(fname,[cleanonerow])
         rpu_rp.WriteStringsToFileAppend(TMP +'replys.RTticks',str(msg))
     elif msg.typeName == 'tickPrice' or msg.typeName == 'tickSize'  :
-        msgarray = (str(msg)).split()
-        reqid=(msgarray[1]).split('=')[1].replace(',','')
-        sym=symTickerIddict[reqid]
-        onerow = (str(msg)).split(',')
-        timenow= datetime.now().time().isoformat()
-        ticktime = timenow.replace(':','').replace('.','')
         fname = DataDown+ today + '.' + sym  +'.rtTICKbar.' + ticktime+'.txt'
         cleanonerow = Mod_TicksUtile.clean_rtTICKbar(onerow,sym)
         rpu_rp.WriteArrayToCsvfile(fname,[cleanonerow])
         rpu_rp.WriteStringsToFileAppend(TMP +'replys.RTticks',str(msg))
-    elif msg.typeName == 'TickString'   :
-        msgarray = (str(msg)).split()
-        reqid=(msgarray[1]).split('=')[1].replace(',','')
-##        sym=symTickerIddict[reqid]
-##        onerow = (str(msg)).split(',')
-##        timenow= datetime.now().time().isoformat()
-##        ticktime = timenow.replace(':','').replace('.','')
+    elif msg.typeName == 'tickString'   :
 ##        fname = DataDown+ today + '.' + sym  +'.rtTICKStringsbar.' + ticktime+'.txt'
 ##        cleanonerow = Mod_TicksUtile.clean_rtTICKbar(onerow,sym)
 ##        rpu_rp.WriteArrayToCsvfile(fname,[cleanonerow])
@@ -130,7 +110,8 @@ def reply_handler(msg):
         rpu_rp.WriteStringsToFileAppend(TMP +'replys.RTticks',str(msg))
 #################################
 print 'Connecting to Live DATAFEED,depth, and per tick trade counter...please wait'
-tws_conn = Connection.create(port=7496, clientId=178) #need separate IDs for both the execution connection and
+uniqueclientIdstring='118'
+tws_conn = Connection.create(port=7496, clientId=117) #need separate IDs for both the execution connection and
 tws_conn.connect()
 tws_conn.register(Mod_ibutiles.error_handler, 'Error')
 tws_conn.registerAll(reply_handler)
@@ -174,6 +155,7 @@ if restartstatus== 'partial':
     pass
 else:    
     import IBDownloaderGOOD
+    import IBDownloader1DAY
 ###############
 while loop < loopmax:
     ## process single files into recent file ##

@@ -69,6 +69,9 @@ def historical_data_handler(msg):
 ##########
 newDataList = []
 print 'connecting hdownload flex'
+uniqueclientId='125'
+tws_conn = Connection.create(port=7496, clientId=uniqueclientId)
+#need separate IDs for both the execution connection and
 tws_conn = Connection.create(port=7496, clientId=125)
 tws_conn.connect()
 tws_conn.register(Mod_ibutiles.error_handler, 'Error')
