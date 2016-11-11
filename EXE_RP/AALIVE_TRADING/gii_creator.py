@@ -26,7 +26,7 @@ date =  yesterday # today
 ######need to create and add labels...
 ##then create tpl files
 locationtag='GITHIGHVOL'
-locationtag='HIGHVOL'
+##locationtag='HIGHVOL'
 webroot='c:/' +locationtag + '/highvol/webroot/'
 tplarea= webroot+'modules/CR_GII/tpls/investor_workflow/'
 stepnum='4'
@@ -177,10 +177,10 @@ def fileloader(filein,mode,qnumin,anumin):
 ##question_text = fileloader(gii_filein,'questiontext','1')
 ##print question_text
 #######################
-for c in range(1,6):
+for c in range(1,17):
     stepnum=str(c)
     print '>>>>>>>>>>>      ',stepnum, '     >>>>>>>>>'
-    tplfile = tplarea +'step-'+stepnum+'.tpl'
+    tplfile = tplarea +'step-'+stepnum+'.tplnew'
 ##    revise_tpl_file(tplfile,mode,search,replacer)
     createtpl(tplfile,stepnum)
 ######################
