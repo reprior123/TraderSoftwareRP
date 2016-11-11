@@ -26,18 +26,17 @@ date =  yesterday # today
 ######need to create and add labels...
 ##then create tpl files
 locationtag='GITHIGHVOL'
-##locationtag='HIGHVOL'
+locationtag='HIGHVOL'
 webroot='c:/' +locationtag + '/highvol/webroot/'
-tplarea= webroot+'modules/CR_GII/tpls/investor_workflow/'
+tplarea= webroot+'modules/PP_PII/tpls/investor_workflow/'
 stepnum='4'
 tplfile = tplarea +'step-'+stepnum+'.tpl'
 outfile = 'step'+stepnum +'bla.tpl.php'
 templatemodelfile = 'templatestep.tpl.php'
-labelsfile =webroot +'custom/Extension/application/Ext/Language/en_us.CR_ComplianceCenter.php'
+labelsfile =webroot +'custom/Extension/application/Ext/Language/en_us.PP_PII.php'
 ##$app_strings['LBL_CR_INVESTOR_PROFILE
 gii_filein=downloads+'GII Questions and scoring - Questions.csv'
 ###############################
-
 def extract_lbltags(filein,mode,search):
     lines = rpu_rp.CsvToLines(filein)
     tag=text=''
@@ -148,19 +147,18 @@ def createtpl(tplfile,stepnum):
             </div>\n\
             <a href="javascript:void(0)" onclick="SUGAR.RiskWorkflow.next()" data-step="'+stepnum+'" class="button gen-button next" >{$APP.LBL_CR_NEXT}</a>\n\
     </div> '
-##    print topsection
-##    print midlines
+
     fulltext =topsection + midlines
-    rpu_rp.WriteStringsToFile(tplfile,fulltext)
+##    rpu_rp.WriteStringsToFile(tplfile,fulltext)
     print 'wrtiing to...',tplfile
     labelname= answer1LBL
     labelstring=answer1
-    lable_adder(answer1LBL,answer1)
-    lable_adder(answer2LBL,answer2)
-    lable_adder(answer3LBL,answer3)
-    lable_adder(answer4LBL,answer4)
-    
-    lable_adder(LBL_Question_title,question_text)
+##    lable_adder(answer1LBL,answer1)
+##    lable_adder(answer2LBL,answer2)
+##    lable_adder(answer3LBL,answer3)
+##    lable_adder(answer4LBL,answer4)
+##    
+##    lable_adder(LBL_Question_title,question_text)
 #######################
 def fileloader(filein,mode,qnumin,anumin):
     print mode,qnumin,anumin
@@ -169,16 +167,17 @@ def fileloader(filein,mode,qnumin,anumin):
     finalanswer= 'nonfound'
     #['GII', 'GII_result', 'Q', '3', '3', 'n/a', '', '', 'MultipleChoice', 'income_certainty', '', 'Wie beurteilen S
     for l in lines:
+##        print l
         qnum = anum ='xxx'       
-        if l[0] == 'GII' and l[2] == 'Q':
+        if l[0] == 'CR_constraints' and l[2] == 'Q':
             qnum=l[3]
             question_text=l[11]
-        if l[0] == 'GII' and l[2] == 'A':
+        if l[0] == 'CR_constraints' and l[2] == 'A':
             anum=l[4]
             answer_text=l[11]
         if mode == 'questiontext' and qnum == qnumin :
             finalanswer = question_text
-        if mode == 'anstext' and anum == qnumin +'.'+ anumin  :
+        if mode == 'anstext' and anum == qnumin +'.'+ anumin :
             finalanswer = answer_text
     print finalanswer
     return finalanswer
@@ -186,14 +185,10 @@ def fileloader(filein,mode,qnumin,anumin):
 ##question_text = fileloader(gii_filein,'questiontext','1')
 ##print question_text
 #######################
-<<<<<<< HEAD
-for c in range(1,17):
-=======
-for c in range(1,14):
->>>>>>> accd014cfa541b9c9f5528994b4fcac0d80fa1bb
+for c in range(1,18):
     stepnum=str(c)
     print '>>>>>>>>>>>      ',stepnum, '     >>>>>>>>>'
-    tplfile = tplarea +'step-'+stepnum+'.tplnew'
+    tplfile = tplarea +'step-'+stepnum+'.tpl'
 ##    revise_tpl_file(tplfile,mode,search,replacer)
     createtpl(tplfile,stepnum)
 ######################
