@@ -17,21 +17,25 @@ for var in nd.keys():
 ##################
 global timedate_format, nextorderID, date, today,recentlimit, time_format,sym, symbol_list, symdict
 moduleNames = open('importmodlist.txt').readlines()
+print moduleNames
 for module in moduleNames:
+    print module.strip()
+
+    
     modulestripped = module.strip()
     if modulestripped != titleself:
-##        print '...',modulestripped,'xxx',titleself
+        print '...',modulestripped,'xxx',titleself
         my_module = importlib.import_module(modulestripped)
         pass
     else:
         print 'is self'
 ######################
-import Mod_TicksUtile, Mod_ibutiles
+##import Mod_TicksUtile, Mod_ibutiles
 ######################
-from ib.ext.Contract import Contract  
-from ib.opt import ibConnection, message
-from ib.ext.Order import Order
-from ib.opt import Connection, message   ##??
+##from ib.ext.Contract import Contract  
+##from ib.opt import ibConnection, message
+##from ib.ext.Order import Order
+##from ib.opt import Connection, message   ##??
 #############################
 global  sym, symbol_list, symdict
 ########################################

@@ -186,11 +186,8 @@ def fileloader(filein,mode,qnumin,anumin):
 ##question_text = fileloader(gii_filein,'questiontext','1')
 ##print question_text
 #######################
-<<<<<<< HEAD
-for c in range(1,17):
-=======
+
 for c in range(1,14):
->>>>>>> accd014cfa541b9c9f5528994b4fcac0d80fa1bb
     stepnum=str(c)
     print '>>>>>>>>>>>      ',stepnum, '     >>>>>>>>>'
     tplfile = tplarea +'step-'+stepnum+'.tplnew'
