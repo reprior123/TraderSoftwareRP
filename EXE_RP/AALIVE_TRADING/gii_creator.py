@@ -101,6 +101,7 @@ def revise_tpl_file(filein,mode,search,replacer):
         else:
             pass
 
+
 ###  Need to append all lables to lable file and replace templates
 def lable_adder(labelname,labelstring):
     lableline = '$app_strings[\''+labelname+'\'] = \''+labelstring +'\';'
@@ -190,7 +191,12 @@ def fileloader(filein,mode,qnumin,anumin):
 ##question_text = fileloader(gii_filein,'questiontext','1')
 ##print question_text
 #######################
+<<<<<<< HEAD
 for c in range(0,15):
+=======
+
+for c in range(1,14):
+>>>>>>> 7e49be1c289cce50d65edbe235fbac76461bd237
     stepnum=str(c)
     print '>>>>>>>>>>>      ',stepnum, '     >>>>>>>>>'
     tplfile = tplarea +'step-'+stepnum+'.tpl'
