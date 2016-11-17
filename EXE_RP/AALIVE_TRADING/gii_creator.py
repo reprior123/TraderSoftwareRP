@@ -26,7 +26,7 @@ date =  yesterday # today
 ######need to create and add labels...
 ##then create tpl files
 locationtag='GITHIGHVOL'
-##locationtag='HIGHVOL'
+locationtag='HIGHVOL'
 webroot='c:/' +locationtag + '/highvol/webroot/'
 tplarea= webroot+'modules/CR_GII/tpls/investor_workflow/'
 stepnum='4'
@@ -35,7 +35,7 @@ outfile = 'step'+stepnum +'bla.tpl.php'
 templatemodelfile = 'templatestep.tpl.php'
 labelsfile =webroot +'custom/Extension/application/Ext/Language/en_us.CR_ComplianceCenter.php'
 ##$app_strings['LBL_CR_INVESTOR_PROFILE
-gii_filein=downloads+'GII Questions and scoring - Questions.csv'
+gii_filein=downloads+'GII Questions and scoring - Questions(1).csv'
 ###############################
 
 def extract_lbltags(filein,mode,search):
@@ -106,19 +106,20 @@ def lable_adder(labelname,labelstring):
     lableline = '$app_strings[\''+labelname+'\'] = \''+labelstring +'\';'
     rpu_rp.WriteStringsToFileAppend(labelsfile,lableline)
 def createtpl(tplfile,stepnum):     
-    fname='risk_volatility'
-    answer1 =  '4%/year'
-    answer2 = answer3 = answer4 = answer1
+##    answer1 =  '4%/year'
+##    answer2 = answer3 = answer4 = answer1
     answer1LBL = 'LBL_ANSWER_GIIresult_'+stepnum+'_1_TEXT'
     answer2LBL = 'LBL_ANSWER_GIIresult_'+stepnum+'_2_TEXT'
     answer3LBL = 'LBL_ANSWER_GIIresult_'+stepnum+'_3_TEXT'
     answer4LBL = 'LBL_ANSWER_GIIresult_'+stepnum+'_4_TEXT'
     
-    LBL_Question_title='LBL_'+fname.upper()
-    question_text='what is assets?'
-
+    
     ansnumin='1'
+    fname='risk_volatility'
+    fname= fileloader(gii_filein,'questionheader',stepnum,ansnumin)
     question_text = fileloader(gii_filein,'questiontext',stepnum,ansnumin)
+    LBL_Question_title='LBL_'+fname.upper()
+
     answer1 = fileloader(gii_filein,'anstext',stepnum,ansnumin)
     answer2 = fileloader(gii_filein,'anstext',stepnum,'2')
     answer3 = fileloader(gii_filein,'anstext',stepnum,'3')
@@ -172,12 +173,15 @@ def fileloader(filein,mode,qnumin,anumin):
         qnum = anum ='xxx'       
         if l[0] == 'GII' and l[2] == 'Q':
             qnum=l[3]
-            question_text=l[11]
+            question_text=l[10]
+            question_header=l[9]
         if l[0] == 'GII' and l[2] == 'A':
             anum=l[4]
             answer_text=l[11]
         if mode == 'questiontext' and qnum == qnumin :
             finalanswer = question_text
+        if mode == 'questionheader' and qnum == qnumin :
+            finalanswer = question_header
         if mode == 'anstext' and anum == qnumin +'.'+ anumin  :
             finalanswer = answer_text
     print finalanswer
@@ -186,14 +190,10 @@ def fileloader(filein,mode,qnumin,anumin):
 ##question_text = fileloader(gii_filein,'questiontext','1')
 ##print question_text
 #######################
-<<<<<<< HEAD
-for c in range(1,17):
-=======
-for c in range(1,14):
->>>>>>> accd014cfa541b9c9f5528994b4fcac0d80fa1bb
+for c in range(0,15):
     stepnum=str(c)
     print '>>>>>>>>>>>      ',stepnum, '     >>>>>>>>>'
-    tplfile = tplarea +'step-'+stepnum+'.tplnew'
+    tplfile = tplarea +'step-'+stepnum+'.tpl'
 ##    revise_tpl_file(tplfile,mode,search,replacer)
     createtpl(tplfile,stepnum)
 ######################

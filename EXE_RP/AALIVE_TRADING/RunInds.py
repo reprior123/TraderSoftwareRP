@@ -35,6 +35,7 @@ if symnum == '1':
 else:
     sym = 'FDAX'
 
+
 def run_indicators():
     for ind in indlist_oscils:
         dur = '5mins'

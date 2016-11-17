@@ -8,7 +8,7 @@ print titleself
 localtag = '_RP'
 sys.path[0:0] = [((os.getcwd().replace('EXE','|')).split('|'))[0] + 'EXE' +localtag]
 #########################################
-import ENVdicts,rpu_rp 
+import ENVdicts,rpu_rp
 nd ={}
 nd = ENVdicts.ENVdicts(localtag)
 
@@ -19,6 +19,7 @@ for var in nd.keys():
 global timedate_format, nextorderID, date, today,recentlimit, time_format,sym, symbol_list, symdict
 moduleNames = open('importmodlist.txt').readlines()
 for module in moduleNames:
+    print module,'...is loading..'
     modulestripped = module.strip()
     if modulestripped != titleself:
 ##        print '...',modulestripped,'xxx',titleself
@@ -27,9 +28,33 @@ for module in moduleNames:
     else:
         print 'is self'
 ######################
-        
-import Mod_TicksUtile
+print   barlist_1day, 'barlist_1day'
+print   barlist_78, '78mins'
+print barlist_1min, 'barlist_1min'
+print barlist_Recent 
+print barlist_Recent78 
+print barlist_Allw5sec
+print indlist_oscils 
+print   indfile 
+##print indlistDict_oscils 
+print indlist_oscils 
+print indlist_crossers 
+print indlist_partofcrosses 
+print indlist_other
+print indlist_lines 
+print    indlist_All
+##########
+import Mod_TicksUtile, Mod_rpInd
 ######################
+def run_indicators():
+    for ind in indlist_oscils:
+        dur = '5mins'
+        sym='ES'
+        R1 = Mod_rpInd.gatherlineNEW(sym,ind,dur)
+        print R1
+##############
+run_indicators()
+##############
 sym = 'ES'
 date =  today  ######## <<<<<<<
 print '1 : ES \n2 : FDAX'
@@ -127,8 +152,11 @@ def run_oneloop(dur,now,sym,date):
 ##    print '##### ',now, dur, sym,' ####### '
 ##    Createlines.create_HAs([sym],date)
     print 'got to clines'
-    Createlines.make_both_states([sym],date)
+    Createlines.make_both_states([sym],date)  #### this is the line which creates new states!!!! important
     print 'finished with createlines'
+    
+    run_indicators()
+    
     ##########
     perc = .70
     maxlines = 5

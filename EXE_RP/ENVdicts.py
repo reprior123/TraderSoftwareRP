@@ -235,7 +235,13 @@ def ENVdicts(localtag):
             varb = (n.split('=')[0]).replace(' ','')   ##supress
             varlistfull.append(varb)
     vardict ={}
-    for var in varlistfull:    
+    verbosemode = 'yes'
+    for var in varlistfull:
+        if verbosemode == 'yes' and 'indlist_' in var:
+            print var, locals()[var]
+            pass
+        else:
+            pass
         vardict[var] = locals()[var]  ##supress
     return vardict   
 ##########################################

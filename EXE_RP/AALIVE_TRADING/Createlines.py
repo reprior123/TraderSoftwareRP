@@ -108,3 +108,5 @@ def make_both_states(symbol_listin,date):
     make_states(date,['ES'],barlist_All,indlist_All) #make_states('fullist',date,['ES'])
     make_states(date,symbol_listin,barlist_All,indlist_All) #make_states('fullist',date,symbol_list)
     print 'made states'
+#################
+    
