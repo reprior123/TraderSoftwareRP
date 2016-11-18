@@ -26,7 +26,7 @@ date =  yesterday # today
 ######need to create and add labels...
 ##then create tpl files
 locationtag='GITHIGHVOL'
-locationtag='HIGHVOL'
+##locationtag='HIGHVOL'
 webroot='c:/' +locationtag + '/highvol/webroot/'
 tplarea= webroot+'modules/CR_GII/tpls/investor_workflow/'
 stepnum='4'
@@ -35,7 +35,7 @@ outfile = 'step'+stepnum +'bla.tpl.php'
 templatemodelfile = 'templatestep.tpl.php'
 labelsfile =webroot +'custom/Extension/application/Ext/Language/en_us.CR_ComplianceCenter.php'
 ##$app_strings['LBL_CR_INVESTOR_PROFILE
-gii_filein=downloads+'GII Questions and scoring - Questions(1).csv'
+gii_filein=downloads+'GII Questions and scoring - Questions (2).csv'
 ###############################
 
 def extract_lbltags(filein,mode,search):
@@ -109,6 +109,7 @@ def lable_adder(labelname,labelstring):
 def createtpl(tplfile,stepnum):     
 ##    answer1 =  '4%/year'
 ##    answer2 = answer3 = answer4 = answer1
+    nextstepnum = str(int(stepnum) +1)
     answer1LBL = 'LBL_ANSWER_GIIresult_'+stepnum+'_1_TEXT'
     answer2LBL = 'LBL_ANSWER_GIIresult_'+stepnum+'_2_TEXT'
     answer3LBL = 'LBL_ANSWER_GIIresult_'+stepnum+'_3_TEXT'
@@ -135,7 +136,7 @@ def createtpl(tplfile,stepnum):
             </div>\n\
             <div class="row portfolio-overview">\n\
                     <div class="small-12 column">\n\
-                            <p><b>{$APP.' +LBL_Question_title+'}:</b><br><br>\n\
+                            <p><b>{$APP.' +LBL_Question_title+'}</b><br><br>\n\
                             </p>\n\
                             <form class="step_form">\n\
                                     <p>'
@@ -148,7 +149,7 @@ def createtpl(tplfile,stepnum):
                             </form>\n\
                     </div>\n\
             </div>\n\
-            <a href="javascript:void(0)" onclick="SUGAR.RiskWorkflow.next()" data-step="'+stepnum+'" class="button gen-button next" >{$APP.LBL_CR_NEXT}</a>\n\
+            <a href="javascript:void(0)" onclick="SUGAR.RiskWorkflow.next()" data-step="'+nextstepnum+'" class="button gen-button next" >{$APP.LBL_CR_NEXT}</a>\n\
     </div> '
 ##    print topsection
 ##    print midlines
@@ -190,13 +191,9 @@ def fileloader(filein,mode,qnumin,anumin):
 ######################
 ##question_text = fileloader(gii_filein,'questiontext','1')
 ##print question_text
-#######################
-<<<<<<< HEAD
-for c in range(0,15):
-=======
+###################
 
-for c in range(1,14):
->>>>>>> 7e49be1c289cce50d65edbe235fbac76461bd237
+for c in range(1,15):
     stepnum=str(c)
     print '>>>>>>>>>>>      ',stepnum, '     >>>>>>>>>'
     tplfile = tplarea +'step-'+stepnum+'.tpl'
