@@ -12,6 +12,7 @@ import ENVdicts,rpu_rp
 nd ={}
 nd = ENVdicts.ENVdicts(localtag)
 
+
 for var in nd.keys():
 ##    print var
     locals()[var] = nd[var]
@@ -29,7 +30,7 @@ for module in moduleNames:
         print 'is self'
 ######################
 print   barlist_1day, 'barlist_1day'
-print   barlist_78, '78mins'
+print   barlist_78, '78mins'   
 print barlist_1min, 'barlist_1min'
 print barlist_Recent 
 print barlist_Recent78 

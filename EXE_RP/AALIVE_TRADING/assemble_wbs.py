@@ -53,7 +53,7 @@ def convertname():
     print flist
     for f in flist:
         newname = f.replace('C:/Users/bob/Downloads/blount','newst')
-        rpu.convertXLSX(f,'txt')
+        rpu_rp.convertXLSX(f,'txt')
         print newname
 #####################
 convertname()

@@ -1,0 +1,232 @@
+Mod_analysePMs.py:def show_spots(sym,date,curprice):
+Mod_analysePMs.py:def get_info(date):
+Mod_BarUtiles.py:def make_dur_state(sym,dur,threshold,indlist):
+Mod_BarUtiles.py:def snapshot_sym(sym,today,durslist):
+Mod_BarUtiles.py:def show_one_bar(sym,dur,bartime,date):
+Mod_BarUtiles.py:def show_bar_range(sym,dur,startbartime,endbartime,date):
+Mod_BarUtiles.py:def show_hi_lo_bar_range(sym,dur,startbartime,endbartime,date):
+Mod_BarUtiles.py:def create_report(Sigfile,sym,barsize):
+Mod_ibutiles.py:def error_handler(msg):
+Mod_ibutiles.py:def reply_handler(msg):
+Mod_ibutiles.py:def parse_tickSnapshot(snapshotmsgline):
+Mod_ibutiles.py:def create_contract(sym,strike,expiry):
+Mod_ibutiles.py:def create_contractOPTION(sym,strike,expiry):
+Mod_ibutiles.py:def create_order(order_type, quantity, action, limitprice, transmitf, auxprice, stopprice, rptype):
+Mod_ibutiles.py:def create_bracket_order(order_type, quantity, action, limitprice, transmitf, auxprice, stopprice, rptype, parentid):
+Mod_Indicators.py:def strip1string(multilinearrayin,fieldnum):
+Mod_Indicators.py:def strip1float(multilinearrayin,fieldnum,sym):
+Mod_Indicators.py:def mvavgToArray(arrayin,smaNum):
+Mod_Indicators.py:def SMAmvavgToArray(arrayin,smaNum):
+Mod_Indicators.py:def RunningTotToArray(arrayin):
+Mod_Indicators.py:def maxminAvgToArray(arrayin):
+Mod_Indicators.py:def maxminABSAvgToArray(arrayin):
+Mod_Indicators.py:def maxStdAvgToArray(arrayin):
+Mod_Indicators.py:def ArrayToAllStats(arrayin,smavalstd):
+Mod_Indicators.py:def MaxMinAvgIndArray(sym,dur,ind,fieldnum):
+Mod_Indicators.py:def MaxMinABSAvgIndArray(sym,dur,ind,fieldnum):
+Mod_Indicators.py:def MaxStdAvgIndArray(sym,dur,ind,fieldnum):
+Mod_Indicators.py:def StatesArrayToAllStats(sym,dur,ind,fieldnum):
+Mod_Indicators.py:def CreateIndvalueTable(indlist,durlist,symlist,filename):
+Mod_Indicators.py:####    def StdToArray(arrayin,smavalstd)
+Mod_Indicators.py:def EMAmvavgToArray(arrayin,smaNum):
+Mod_Indicators.py:def lableToarray(bsclose,tag):
+Mod_Indicators.py:def difftwoarrays(a1,a2):
+Mod_Indicators.py:def difftwoarraysMIDS(a1,a2):
+Mod_Indicators.py:def ratiotwoarrays(a1,a2,mode,basevalue1,basevalue2):
+Mod_Indicators.py:def makearrayJust2(time,slopebs,signbs,bsclose,indy2,slope2,sign2,indlabel):  ## assumes one field in postion 0
+Mod_Indicators.py:def show_slope(arrayin,mode):
+Mod_Indicators.py:def show_cross(signs,mode):  
+Mod_Indicators.py:def show_sign(a1,tag,threshold):  
+Mod_Indicators.py:def show_sign2thresholds(a1,tag,threshold1,threshold2):  
+Mod_Indicators.py:def pivotpoint(a1,a2,a3): ## hi,lo,close arrays
+Mod_Indicators.py:def RS(a1,a2,a3,mode,levelmode):  ## S1 is the same but with lows ## pivot,high,lo,close arrays
+Mod_Indicators.py:def MACDdiverg(bsclose):
+Mod_Indicators.py:def Trigger_from_states(sym,dur,label):
+Mod_Indicators.py:def Trigger_from_statesValues(sym,dur,label,valuemin,valuemax):
+Mod_Indicators.py:def ShowIndBar(sym,dur,ind,mode,barnum,bartime):
+Mod_Indicators.py:def ShowRecentPositionState(sym):
+Mod_Indicators.py:def ShowRecentAge(sym,dur,ind,rootname):
+Mod_Indicators.py:def ShowRecentIndValue(sym,dur,ind,statfnum):
+Mod_Indicators.py:def ShowRecentStateStats(sym,dur,label,rootname,statfnum):
+Mod_Indicators.py:def ShowRecentCRXLine(sym,dur,label,mode):
+Mod_Indicators.py:def ShowRecentCRXTime(sym,dur,label,mode):
+Mod_Indicators.py:def ShowRecentCRXCode(sym,dur,label,mode):
+Mod_Indicators.py:def ShowRecentClPrice(sym,dur,label,mode):
+Mod_Indicators.py:def ShowRecentStateValue(sym,dur,label,mode):
+Mod_Indicators.py:def TRarray(highs,lows,closes):
+Mod_Indicators.py:##    def mvavgToArray(arrayin,smaNum):
+Mod_Indicators.py:def TRhilowarray(highs,lows,closes):
+Mod_Indicators.py:##    def mvavgToArray(arrayin,smaNum):
+Mod_Indicators.py:def TR3array(highs,lows,closes):
+Mod_Indicators.py:##    def mvavgToArray(arrayin,smaNum):
+Mod_Indicators.py:def ATR(highs,lows,closes,maVal):
+Mod_Indicators.py:def ROC(closes,nfactor):
+Mod_Indicators.py:def CMF(closes,lows,highs,volume,maVal):   ## chalkin moneyflow
+Mod_Indicators.py:def OBV(closes,volume,maVal):   ## on balance volume slope change precedes mkt flip
+Mod_Indicators.py:def RSI(closes,maVal):
+Mod_Indicators.py:def keltner_channels(highs,lows,closes,mult,uplow):
+Mod_Indicators.py:def StdToArray(arrayin,smavalstd):
+Mod_Indicators.py:def stddev(highs,lows,closes,SMAVal):
+Mod_Indicators.py:def bbands(highs,lows,closes,SMAVal,stdvariable,uplow):
+Mod_Indicators.py:def keltner_channel_mid(highs,lows,closes,mult):
+Mod_Indicators.py:def show_bar8(today,sym):
+Mod_Indicators.py:def diffvES(close1,close2):
+Mod_Indicators.py:def create_RSlines(sym,clprice):
+Mod_Indicators.py:def boost_pricearray(arrayprices,sym):
+Mod_Indicators.py:def create_states_files(sym,dur,date,threshold,newindlist):
+Mod_Indicators.py:def joinArraysStates(tarray,indicator,sign,slope,slopetag,Indtitle,sym,crxxflag,tagarray,highs,lows,bsclose,crossages,stdval):  ## assumes one field in postion 0
+Mod_Indicators.py:def fibbo_50retrace(low,high,sym,perc) :  # could also use a time range for a range of bars / add this to states per duration
+Mod_Indicators.py:def check_lines(linesfile,curprice,tolerance):
+Mod_Indicators.py:def gatherline(sym,ind):
+Mod_Indicators.py:def gatherlineNEW(sym,ind,dur):
+Mod_Indicators.py:def find_hi_low(array,scanvalue,style,cvalue):
+Mod_Indicators.py:def StochD(Kpercarray,emaval):
+Mod_Indicators.py:def StochK(highs,lows,closes,scanvalue):
+Mod_Indicators.py:def Stoch_CROSS(Karray,Darray):
+Mod_Indicators.py:def RVIline(Kpercarray,emaval):
+Mod_Indicators.py:def RVIsignal(opens,highs,lows,closes):
+Mod_Indicators.py:def RVI_CROSS(Karray,Darray):
+Mod_MktInfoUtilles.py:def notsure():
+Mod_MktInfoUtilles.py:def get_info(date):
+Mod_MktInfoUtilles.py:def scan_bars_for_tag(bars,price,sym,start,end,date):
+Mod_MktInfoUtilles.py:def detect_sliceDice(lineprice,start,end,ndate):
+Mod_MktInfoUtilles.py:def show_bar8_range(start,end,sym,date):
+Mod_MktInfoUtilles.py:def run_8s(sym): 
+Mod_MktInfoUtilles.py:def getonesliceonly(bars,slicesize,slicenum):
+Mod_MktInfoUtilles.py:def find_swing_point_in_oneslice(slicesize,slicebars,mode):
+Mod_MktInfoUtilles.py:def find_swings(): # this runs through the series of slices
+Mod_RP_Snapshot.py:def make_dur_state(sym,dur,threshold,indlist):
+Mod_RP_Snapshot.py:def snapshot_sym(sym,today,durslist):
+Mod_RP_Snapshot.py:def show_one_bar(sym,dur,bartime,date):
+Mod_RP_Snapshot.py:def show_bar_range(sym,dur,startbartime,endbartime,date):
+Mod_RP_Snapshot.py:def show_hi_lo_bar_range(sym,dur,startbartime,endbartime,date):
+Mod_RP_Snapshot.py:def create_report(Sigfile,sym,barsize):
+Mod_rpBarmaker.py:def strip1string(multilinearrayin,fieldnum):
+Mod_rpBarmaker.py:def strip1float(multilinearrayin,fieldnum,sym):
+Mod_rpBarmaker.py:def boost_pricearray(arrayprices,sym):
+Mod_rpBarmaker.py:def GetBars(arrayin,sym,Indtitle,dur,threshold):  #add barr age from last cross here
+Mod_rpBarmaker.py:def create_bars_files(sym,dur,date,threshold,newindlist):
+Mod_rpBarmaker.py:def make_bars(times,opens,highs,lows,closes):  ## S1 is the same but with lows ## pivot,high,lo,close arrays
+Mod_rpBarmaker.py:def fibbo_50retrace(low,high,sym,perc) :  # could also use a time range for a range of bars / add this to states per duration
+Mod_rpBarmaker.py:def find_hi_low(array,scanvalue,style,cvalue):
+Mod_rpInd dbase notes IMPORTANT.py:def mvavgToArray(arrayin,smaNum):
+Mod_rpInd dbase notes IMPORTANT.py:def EMAmvavgToArray(arrayin,smaNum):
+Mod_rpInd dbase notes IMPORTANT.py:def TenkanSenmvavgToArray(arrayin,arrayhighs,arraylows,smaNum):
+Mod_rpInd dbase notes IMPORTANT.py:def RSImvavgToArray(arrayin,smaNum):
+Mod_rpInd dbase notes IMPORTANT.py:def RSIToArray(arrayin,smaNum):
+Mod_rpInd dbase notes IMPORTANT.py:def RSIGainLoss(arrayin,gainmode):
+Mod_rpInd dbase notes IMPORTANT.py:def difftwoarrays(a1,a2):
+Mod_rpInd dbase notes IMPORTANT.py:def ratiotwoarrays(a1,a2):
+Mod_rpInd dbase notes IMPORTANT.py:def test_study_values(timestamparray,valuearray,pricearray,sym,testlevela2,linetext):
+Mod_rpInd dbase notes IMPORTANT.py:def test_stoch_values(timestamparray,valuearray,pricearray,sym,testlevela2,linetext):
+Mod_rpInd dbase notes IMPORTANT.py:def create_stoch(arrayclose,arrayhis,arraylows,barticksize,mode):
+Mod_rpInd dbase notes IMPORTANT.py:def makearray(a1,a2,a3,a4,a5,a6,a7,a8,mode):  ## assumes one field in postion 0
+Mod_rpInd dbase notes IMPORTANT.py:def makearrayJust2(time,slopebs,signbs,bs,indy2,slope2,sign2):  ## assumes one field in postion 0
+Mod_rpInd dbase notes IMPORTANT.py:def show_slope(arrayin,tag):
+Mod_rpInd dbase notes IMPORTANT.py:def CLV_Value(Carray,Larray,Harray):
+Mod_rpInd dbase notes IMPORTANT.py:def sushiroll_finder():
+Mod_rpInd dbase notes IMPORTANT.py:def backtest_sigs(arrayin,texttosell,texttobuy,pricefnum):
+Mod_rpInd dbase notes IMPORTANT.py:def show_test_lines(arrayin,texttosell,texttobuy,pricefnum,testval):
+Mod_rpInd dbase notes IMPORTANT.py:def show_macd_low_lines(arrayin,texttosell,texttobuy,pricefnum,macdtestval,macdfnum):
+Mod_rpInd dbase notes IMPORTANT.py:def show_smi_cross_lines(arrayin,texttosell,texttobuy,pricefnum,macdtestval):
+Mod_rpInd dbase notes IMPORTANT.py:def show_nearcross(arrayin,texttosell,texttobuy,pricefnum):
+Mod_rpInd dbase notes IMPORTANT.py:def format_lines(arrayin,tailamt):
+Mod_rpInd dbase notes IMPORTANT.py:def format_arrays(array1,stringnums):  ## 1 is one string, 3 is 3 strings
+Mod_rpInd dbase notes IMPORTANT.py:def show_crossover(signs,tag):  
+Mod_rpInd dbase notes IMPORTANT.py:def show_sign(a1,tag):  
+Mod_rpInd dbase notes IMPORTANT.py:def pivotpoint(a1,a2,a3):
+Mod_rpInd dbase notes IMPORTANT.py:def R1(a1,a2):  ## S1 is the same but with lows
+Mod_rpInd dbase notes IMPORTANT.py:def process_ticks(lines,sym,dur):
+Mod_rpInd dbase notes IMPORTANT.py:def process_MACDticks(lines,sym,dur):
+Mod_rpInd dbase notes IMPORTANT.py:def notes():
+Mod_rpInd dbase notes IMPORTANT.py:def MACDdiverg():
+Mod_rpInd dbase notes IMPORTANT.py:def keltner_channel_upper(smaval,mult):
+Mod_rpInd dbase notes IMPORTANT.py:def keltner_channel_lower():
+Mod_rpInd dbase notes IMPORTANT.py:def keltner_channel_mid():
+Mod_rpInd dbase notes IMPORTANT.py:def fibbo_retrace(startbarval,endbarval):
+Mod_rpInd dbase notes IMPORTANT.py:def CCI():
+Mod_rpInd dbase notes IMPORTANT.py:def Trigger_MACD(lines,sym,dur):
+Mod_rpInd dbase notes IMPORTANT.py:def joinArraysStates(timestamparray,indicator,sign,slope):  ## assumes one field in postion 0
+Mod_rpInd dbase notes IMPORTANT.py:def GetStates(arrayin,sym,Indtitle):  #add barr age from last cross here
+Mod_rpInd.py:def strip1string(multilinearrayin,fieldnum):
+Mod_rpInd.py:def strip1float(multilinearrayin,fieldnum,sym):
+Mod_rpInd.py:def strip1floatfromstring(multilinearrayin,fieldnum,sym):
+Mod_rpInd.py:def mvavgToArray(arrayin,smaNum):
+Mod_rpInd.py:def SMAmvavgToArray(arrayin,smaNum):
+Mod_rpInd.py:def RunningTotToArray(arrayin):
+Mod_rpInd.py:def maxminAvgToArray(arrayin):
+Mod_rpInd.py:def maxminABSAvgToArray(arrayin):
+Mod_rpInd.py:def maxStdAvgToArray(arrayin):
+Mod_rpInd.py:def ArrayToAllStats(arrayin,smavalstd):
+Mod_rpInd.py:def MaxMinAvgIndArray(sym,dur,ind,fieldnum):
+Mod_rpInd.py:def MaxMinABSAvgIndArray(sym,dur,ind,fieldnum):
+Mod_rpInd.py:def MaxStdAvgIndArray(sym,dur,ind,fieldnum):
+Mod_rpInd.py:def StatesArrayToAllStats(sym,dur,ind,fieldnum):
+Mod_rpInd.py:def CreateIndvalueTable(indlist,durlist,symlist,filename):
+Mod_rpInd.py:####    def StdToArray(arrayin,smavalstd)
+Mod_rpInd.py:def EMAmvavgToArray(arrayin,smaNum):
+Mod_rpInd.py:def lableToarray(bsclose,tag):
+Mod_rpInd.py:def difftwoarrays(a1,a2):
+Mod_rpInd.py:def difftwoarraysMIDS(a1,a2):
+Mod_rpInd.py:def ratiotwoarrays(a1,a2,mode,basevalue1,basevalue2):
+Mod_rpInd.py:def makearrayJust2(time,slopebs,signbs,bsclose,indy2,slope2,sign2,indlabel):  ## assumes one field in postion 0
+Mod_rpInd.py:def show_slope(arrayin,mode):
+Mod_rpInd.py:def show_cross(signs,mode):  
+Mod_rpInd.py:def show_sign(a1,tag,threshold):  
+Mod_rpInd.py:def show_sign2thresholds(a1,tag,threshold1,threshold2):  
+Mod_rpInd.py:def Trigger_from_states(sym,dur,label):
+Mod_rpInd.py:def Trigger_from_statesValues(sym,dur,label,valuemin,valuemax):
+Mod_rpInd.py:def ShowIndBar(sym,dur,ind,mode,barnum,bartime):
+Mod_rpInd.py:def ShowRecentPositionState(sym):
+Mod_rpInd.py:def ShowRecentAge(sym,dur,ind,rootname):
+Mod_rpInd.py:def ShowRecentIndValue(sym,dur,ind,statfnum):
+Mod_rpInd.py:def ShowRecentStateStats(sym,dur,label,rootname,statfnum):
+Mod_rpInd.py:def ShowRecentCRXLine(sym,dur,label,mode):
+Mod_rpInd.py:def ShowRecentCRXTime(sym,dur,label,mode):
+Mod_rpInd.py:def ShowRecentCRXCode(sym,dur,label,mode):
+Mod_rpInd.py:def ShowRecentClPrice(sym,dur,label,mode):
+Mod_rpInd.py:def ShowRecentStateValue(sym,dur,label,mode):
+Mod_rpInd.py:def StdToArray(arrayin,smavalstd):
+Mod_rpInd.py:def stddev(highs,lows,closes,SMAVal):
+Mod_rpInd.py:def boost_pricearray(arrayprices,sym):
+Mod_rpInd.py:def create_states_files(sym,dur,date,threshold,newindlist):
+Mod_rpInd.py:def joinArraysStates(tarray,indicator,sign,slope,slopetag,Indtitle,sym,crxxflag,tagarray,highs,lows,bsclose,crossages,stdval):  ## assumes one field in postion 0
+Mod_rpInd.py:def fibbo_50retrace(low,high,sym,perc) :  # could also use a time range for a range of bars / add this to states per duration
+Mod_rpInd.py:def check_lines(linesfile,curprice,tolerance):
+Mod_rpInd.py:def gatherline(sym,ind):
+Mod_rpInd.py:def gatherlineNEW(sym,ind,dur):
+Mod_rpInd.py:def find_hi_low(array,scanvalue,style,cvalue):
+Mod_rpInd.py:def StochD(Kpercarray,emaval):
+Mod_rpInd.py:def GetStates(arrayin,sym,Indtitle,dur,threshold,date,alternatearrayin):  #add barr age from last cross here
+Mod_TickBarUtiles.py:def create_roundies(sym):
+Mod_TickBarUtiles.py:def get_info(date):
+Mod_TickBarUtiles.py:def scan_bars_for_tag(bars,price,sym,start,end,date):
+Mod_TickBarUtiles.py:def detect_sliceDice(lineprice,start,end):
+Mod_TickBarUtiles.py:def OBV(date,sym):
+Mod_TickBarUtiles.py:######def StochD(Kpercarray,emaval):
+Mod_TickBarUtiles.py:def create_report(Sigfile,sym,barsize):
+Mod_TickBarUtiles.py:####def slice_dice_dectector(sym,date,starttime,endtime,spotline,direction):
+Mod_TickBarUtiles.py:def linetagger(spotline,sym):
+Mod_TickBarUtiles.py:def show_spots(sym,date,limit):
+Mod_TickBarUtiles.py:def show_bar8_range(start,end,sym,date):
+Mod_TickBarUtiles.py:def run_8s(sym): 
+Mod_TickBarUtiles.py:def getslices(sym,barsize,start,end,date,slicesize):
+Mod_TickBarUtiles.py:def find_swing_pointsnew(slicesize,slicebars,mode):
+Mod_TicksUtile.py:def convertTime(timestring,formatout,direction):
+Mod_TicksUtile.py:def throw_out_lastbar(f):
+Mod_TicksUtile.py:def merge_bar_files(filerecent,fileddload,fileboth,cutoffmintime):
+Mod_TicksUtile.py:def createMultiDay_bar_files(sym,dur,baseroot):
+Mod_TicksUtile.py:def last_bar_epoch(filename,roundformat): #'rounded or noround  #last_bar_epochrounded
+Mod_TicksUtile.py:def quarterround(num):
+Mod_TicksUtile.py:def create_bars_from_bars(bararrayin,today,sym,dur,durinseconds,hamode): #startmodes[initialize,bartobar,addonbartoboth]
+Mod_TicksUtile.py:def clean_RTTick5secBars(oneline,sym):
+Mod_TicksUtile.py:def clean_rtTICKbar(oneline,sym):
+Mod_TicksUtile.py:def clean_rtDOMbar(oneline,sym):
+Mod_TicksUtile.py:def prepare_rtDOMbars(date,sym,startmode):
+Mod_TicksUtile.py:def prepare_rtTICKbar(date,sym,startmode):
+Mod_TicksUtile.py:def prepare_tickfilesto5secBars(date,sym,startmode):
+Mod_TicksUtile.py:def create_state_files(today,sym,dur,indicator):   
+Mod_TicksUtile.py:def recenttick(sym,mode):
+Mod_TicksUtile.py:def backupTickfiles(fname1):
+Mod_TicksUtile.py:def trimFile(fname1,linesleft):
+Mod_TicksUtile.py:def fibbo(fibR,anchor,peak,trend):

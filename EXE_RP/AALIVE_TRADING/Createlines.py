@@ -34,6 +34,8 @@ current_time = datetime.now().time()
 btmode = 'BACKTEST22222'
 #########################
 prevsigid = ''
+
+
 ##########################################
 def rounderrp(x,tickvalue):
     opptick = int(1/tickvalue)

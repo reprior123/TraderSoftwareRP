@@ -16,7 +16,10 @@ import glob, csv, subprocess, datetime, shutil, time
 from time import sleep, strftime, localtime
 from datetime import datetime, date, timedelta
 import ctypes, winsound
-##import xlrd, openpyxl,zipfile ### these have been moved... numpy,codecs, cStringIO
+rpmode = 'nonlap'
+if rpmode == 'nonlap':
+    import openpyxl
+##    import xlrd, openpyxl,zipfile ### these have been moved... numpy,codecs, cStringIO
 ## time functions ##
 timenow = time.strftime(unixmin_format)
 #####################################
