@@ -28,16 +28,16 @@ date =  yesterday # today
 locationtag='GITHIGHVOL'
 ##locationtag='HIGHVOL'
 webroot='c:/' +locationtag + '/highvol/webroot/'
-tplarea= webroot+'modules/CR_GII/tpls/investor_workflow/'
+tplarea= ''# webroot+'modules/CR_GII/tpls/investor_workflow/'
 stepnum='4'
-tplfile = tplarea +'step-'+stepnum+'.tpl'
+##tplfile = tplarea +'step-'+stepnum+'.tpl'
 outfile = 'step'+stepnum +'bla.tpl.php'
 templatemodelfile = 'templatestep.tpl.php'
 labelsfile =webroot +'custom/Extension/application/Ext/Language/en_us.CR_ComplianceCenter.php'
+labelsfile = webroot +'bla.php'
 ##$app_strings['LBL_CR_INVESTOR_PROFILE
 gii_filein=downloads+'GII Questions and scoring - Questions (2).csv'
 ###############################
-
 def extract_lbltags(filein,mode,search):
     lines = rpu_rp.CsvToLines(filein)
     tag=text=''
@@ -57,13 +57,13 @@ def extract_lbltags(filein,mode,search):
                 pass
             else:
                 pass
+########################
 mode='search'
 mode='all'
 lable= 'LBL_CR_UP_TO'
 lable='LBL_CR_SURROUNDINGS'
 search = lable
 ##############extract_lbltags(labelsfile,mode,search)
-
 mode='replace'
 mode='grep'
 search = lable
@@ -100,8 +100,7 @@ def revise_tpl_file(filein,mode,search,replacer):
             pass
         else:
             pass
-
-
+######################################
 ###  Need to append all lables to lable file and replace templates
 def lable_adder(labelname,labelstring):
     lableline = '$app_strings[\''+labelname+'\'] = \''+labelstring +'\';'
@@ -113,8 +112,7 @@ def createtpl(tplfile,stepnum):
     answer1LBL = 'LBL_ANSWER_GIIresult_'+stepnum+'_1_TEXT'
     answer2LBL = 'LBL_ANSWER_GIIresult_'+stepnum+'_2_TEXT'
     answer3LBL = 'LBL_ANSWER_GIIresult_'+stepnum+'_3_TEXT'
-    answer4LBL = 'LBL_ANSWER_GIIresult_'+stepnum+'_4_TEXT'
-    
+    answer4LBL = 'LBL_ANSWER_GIIresult_'+stepnum+'_4_TEXT'    
     
     ansnumin='1'
     fname='risk_volatility'
@@ -172,6 +170,7 @@ def fileloader(filein,mode,qnumin,anumin):
     finalanswer= 'nonfound'
     #['GII', 'GII_result', 'Q', '3', '3', 'n/a', '', '', 'MultipleChoice', 'income_certainty', '', 'Wie beurteilen S
     for l in lines:
+##        print l
         qnum = anum ='xxx'       
         if l[0] == 'GII' and l[2] == 'Q':
             qnum=l[3]
@@ -189,16 +188,96 @@ def fileloader(filein,mode,qnumin,anumin):
     print finalanswer
     return finalanswer
 ######################
+def create_vardefs(tplfile,stepnum):     
+    nextstepnum = str(int(stepnum) +1)
+    answer1LBL = 'LBL_ANSWER_GIIresult_'+stepnum+'_1_TEXT'
+    answer2LBL = 'LBL_ANSWER_GIIresult_'+stepnum+'_2_TEXT'
+    answer3LBL = 'LBL_ANSWER_GIIresult_'+stepnum+'_3_TEXT'
+    answer4LBL = 'LBL_ANSWER_GIIresult_'+stepnum+'_4_TEXT'    
+    
+    ansnumin='1'
+##    fname='risk_volatility'
+    fname= fileloader(gii_filein,'questionheader',stepnum,ansnumin)
+    question_text = fileloader(gii_filein,'questiontext',stepnum,ansnumin)
+    LBL_Question_title='LBL_'+fname.upper()
+
+    answer1 = fileloader(gii_filein,'anstext',stepnum,ansnumin)
+    answer2 = fileloader(gii_filein,'anstext',stepnum,'2')
+    answer3 = fileloader(gii_filein,'anstext',stepnum,'3')
+    answer4 = fileloader(gii_filein,'anstext',stepnum,'4')
+
+    vardefsection = '\n\
+                   \'' + fname + '\' =>\n\
+                        array (\n\
+                                \'required\' => false,\n\
+                                \'name\' => \''+ fname+'\',\n\
+                                \'vname\' => \''+ 'LBL_' + fname.upper() +'\',\n\
+                                \'type\' => \'varchar\',\n\
+                                \'massupdate\' => 0,\n\
+                                \'no_default\' => false,\n\
+                                \'comments\' => \'\',\n\
+                                \'help\' => \'\',\n\
+                                \'importable\' => \'true\',\n\
+                                \'duplicate_merge\' => \'disabled\',\n\
+                                \'duplicate_merge_dom_value\' => \'0\',\n\
+                                \'audited\' => true,\n\
+                                \'reportable\' => true,\n\
+                                \'unified_search\' => false,\n\
+                                \'merge_filter\' => \'disabled\',\n\
+                                \'len\' => \'255\',\n\
+                                \'size\' => \'20\',\n\
+                        ),\n\
+                        '
+
+
+    topsection = ''
+    midlines = '\n\
+    <input type="radio" name="'+fname+'" value="'+answer1+'" {if $data->'+fname+' eq "'+answer1+'"}checked="checked"{/if}>{$APP.'+answer1LBL + '}<br>\n\
+    <input type="radio" name="'+fname+'" value="'+answer2+'" {if $data->'+fname+' eq "'+answer2+'"}checked="checked"{/if}>{$APP.'+answer2LBL + '}<br>\n\
+    <input type="radio" name="'+fname+'" value="'+answer3+'" {if $data->'+fname+' eq "'+answer3+'"}checked="checked"{/if}>{$APP.'+answer3LBL + '}<br>\n\
+    <input type="radio" name="'+fname+'" value="'+answer4+'" {if $data->'+fname+' eq "'+answer4+'"}checked="checked"{/if}>{$APP.'+answer4LBL + '}<br>\n\ '
+
+    fulltext =topsection + midlines
+    rpu_rp.WriteStringsToFile('vardefsQs.txt',fulltext)
+    print vardefsection
+##    labelname= answer1LBL
+##    lable_adder(LBL_Question_title,question_text)
+#######################
+def fileloader(filein,mode,qnumin,anumin):
+##    print mode,qnumin,anumin
+    lines = rpu_rp.CsvToLines(filein)
+    tag=text=''
+    finalanswer= 'nonfound'
+    #['GII', 'GII_result', 'Q', '3', '3', 'n/a', '', '', 'MultipleChoice', 'income_certainty', '', 'Wie beurteilen S
+    for l in lines:
+##        print l
+        qnum = anum ='xxx'       
+        if l[0] == 'GII' and l[2] == 'Q':
+            qnum=l[3]
+            question_text=l[10]
+            question_header=l[9]
+        if l[0] == 'GII' and l[2] == 'A':
+            anum=l[4]
+            answer_text=l[11]
+        if mode == 'questiontext' and qnum == qnumin :
+            finalanswer = question_text
+        if mode == 'questionheader' and qnum == qnumin :
+            finalanswer = question_header
+        if mode == 'anstext' and anum == qnumin +'.'+ anumin  :
+            finalanswer = answer_text
+##    print finalanswer
+    return finalanswer
+######################
 ##question_text = fileloader(gii_filein,'questiontext','1')
 ##print question_text
 ###################
-
 for c in range(1,15):
     stepnum=str(c)
-    print '>>>>>>>>>>>      ',stepnum, '     >>>>>>>>>'
+##    print '>>>>>>>>>>>      ',stepnum, '     >>>>>>>>>'
     tplfile = tplarea +'step-'+stepnum+'.tpl'
 ##    revise_tpl_file(tplfile,mode,search,replacer)
-    createtpl(tplfile,stepnum)
+##    createtpl(tplfile,stepnum)
+    create_vardefs(tplfile,stepnum)
 ######################
 ##["$app_strings['LBL_CR_NO'] = 'No';"]
 ##<p><b>{$APP.LBL_CR_ASSETS}:</b><br><br>   line for questionheader
