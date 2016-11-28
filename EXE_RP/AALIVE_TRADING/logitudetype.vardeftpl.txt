@@ -1,0 +1,21 @@
+                'real_estate_mortgage_amount' => array(
+ 'lng' =>
+  array (
+    'required' => true,
+    'name' => 'lng',
+    'vname' => 'LBL_LNG',
+    'type' => 'float',
+    'massupdate' => 0,
+    'comments' => '',
+    'help' => 'Longitude',
+    'importable' => 'true',
+    'duplicate_merge' => 'disabled',
+    'duplicate_merge_dom_value' => '0',
+    'audited' => false,
+    'reportable' => true,
+    'len' => '11',
+    'size' => '20',
+    'precision' => '8',
+	
+	
+),

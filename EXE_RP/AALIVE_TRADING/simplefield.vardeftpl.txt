@@ -1,0 +1,6 @@
+                'real_estate_mortgage_amount' => array(
+                        'name' => 'real_estate_mortgage_amount',
+                        'type' => 'varchar',
+                        'vname' => 'LBL_REAL_ESTATE_MORTGAGE_AMOUNT',
+                        'len' => '52',
+),

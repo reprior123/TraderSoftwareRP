@@ -1,0 +1,23 @@
+                'real_estate_mortgage_amount' => array(
+                        'name' => 'real_estate_mortgage_amount',
+                        'type' => 'varchar',
+                        'vname' => 'LBL_REAL_ESTATE_MORTGAGE_AMOUNT',
+                        'len' => '52',
+						
+						    'required' => false,
+    'name' => 'document_id_c',
+    'vname' => '',
+    'type' => 'id',
+    'massupdate' => 0,
+    'no_default' => false,
+    'comments' => '',
+    'help' => '',
+    'importable' => 'true',
+    'duplicate_merge' => 'disabled',
+    'duplicate_merge_dom_value' => 0,
+    'audited' => false,
+    'reportable' => false,
+    'unified_search' => false,
+    'merge_filter' => 'disabled',
+	
+),

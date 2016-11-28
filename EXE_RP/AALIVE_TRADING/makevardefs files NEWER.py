@@ -29,6 +29,7 @@ newfile = downloads +  'fields list WIP new Suitecrm - Organizations.csv'
 
 #newfile = heredir + '/fieldsin.csv'
 import fileinput
+newfile = 'newfields.txt'
 
 lines = rpu_rp.CsvToLines(newfile)
 
@@ -45,17 +46,15 @@ print '$dictionary[\'' + modulename + '\'] = array( \n\
                 \'duplicate_merge\'=>true,\n\
                 \'fields\'=>array (\n\
 '
-
-
-
 lablearray =[]
 for l in lines:
 ##    print l
     if l[0] != 'ggggggg':
         floatprec =''
-        prefix = 'org' # l[1] #l[2]
-        fname = l[0]#l[1]
+        prefix = '' #'org' # l[1] #l[2]
+        fname = l[0].lower()#l[1]
         fullname = prefix + '_' + fname
+        fullname = prefix + '' + fname
         fulldesc = 'bla'#l[3]
         ftype = prefix #'decimal' # fulldesc.split('(')[0]
         if prefix =='price':
@@ -67,7 +66,7 @@ for l in lines:
         newf = fullname
         dropdownname = 'language_list'
         defaultval = 'English'
-        labelprefix = 'LBL_ORG_'
+        labelprefix = 'LBL_'
         print '\''+newf +'\''+ ' => array('
         print '\'name\' => ' +  '\''+newf +'\','
         print '\'vname\' => ' +  '\''+labelprefix+newf.upper() +'\','
@@ -97,38 +96,6 @@ for l in lines:
 for  l in lablearray:
     print l
         #print '\'LBL_'+newf.upper()  +'\''+ ' => \'' + newf.replace('_',' ') +'\','
-'''
- 'lng' =>
-  array (
-    'required' => true,
-    'name' => 'lng',
-    'vname' => 'LBL_LNG',
-    'type' => 'float',
-    'massupdate' => 0,
-    'comments' => '',
-    'help' => 'Longitude',
-    'importable' => 'true',
-    'duplicate_merge' => 'disabled',
-    'duplicate_merge_dom_value' => '0',
-    'audited' => false,
-    'reportable' => true,
-    'len' => '11',
-    'size' => '20',
-    'precision' => '8',
-
-    'required' => false,
-    'name' => 'document_id_c',
-    'vname' => '',
-    'type' => 'id',
-    'massupdate' => 0,
-    'no_default' => false,
-    'comments' => '',
-    'help' => '',
-    'importable' => 'true',
-    'duplicate_merge' => 'disabled',
-    'duplicate_merge_dom_value' => 0,
-    'audited' => false,
-    'reportable' => false,
-    'unified_search' => false,
-    'merge_filter' => 'disabled',
-'''
+    ########################
+    
+print rpu_rp.catstring('simplefield.vardeftpl.txt')

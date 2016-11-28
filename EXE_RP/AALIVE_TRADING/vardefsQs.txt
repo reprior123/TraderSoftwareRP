@@ -1,0 +1,6 @@
+
+    <input type="radio" name="nonfound" value="nonfound" {if $data->nonfound eq "nonfound"}checked="checked"{/if}>{$APP.LBL_ANSWER_GIIresult_14_1_TEXT}<br>
+    <input type="radio" name="nonfound" value="nonfound" {if $data->nonfound eq "nonfound"}checked="checked"{/if}>{$APP.LBL_ANSWER_GIIresult_14_2_TEXT}<br>
+    <input type="radio" name="nonfound" value="nonfound" {if $data->nonfound eq "nonfound"}checked="checked"{/if}>{$APP.LBL_ANSWER_GIIresult_14_3_TEXT}<br>
+    <input type="radio" name="nonfound" value="nonfound" {if $data->nonfound eq "nonfound"}checked="checked"{/if}>{$APP.LBL_ANSWER_GIIresult_14_4_TEXT}<br>
+\ 
