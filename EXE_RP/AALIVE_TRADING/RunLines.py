@@ -155,6 +155,10 @@ def run_oneloop(dur,now,sym,date):
     print 'got to clines'
     Createlines.make_both_states([sym],date)  #### this is the line which creates new states!!!! important
     print 'finished with createlines'
+    todofile = 'checkforthese.file.txt'
+    todolines = rpu_rp.CsvToLines(todofile)
+    print todolines
+    
     
     run_indicators()
     
