@@ -15,6 +15,8 @@ for var in nd.keys():
 ##    print var
     locals()[var] = nd[var]
 ##################
+
+    
 print TMP
 sleep(20)
 global timedate_format, nextorderID, date, today,recentlimit, time_format,sym, symbol_list, symdict
