@@ -204,7 +204,7 @@ def ENVdicts(localtag):
     barlist_Recent78 = barlist_Recent + barlist_78
     barlist_All = barlist_Recent + barlist_1day
     barlist_Allw5sec = barlist_All + barlist_5sec
-    indlist_oscils = ['ROC','AO','AOAcc','RSI']
+    indlist_oscils = ['ROC','AO','AOAcc','RSI'] ##supress
     indfile = projectarea +'indfile.csv'
     indlistDict_oscils = create_dictByKey(indfile,0,1,1,'osc') #(file_inname, field1, field2,fieldkey,valuekey)
     indlist_oscils = indlistDict_oscils.keys()
