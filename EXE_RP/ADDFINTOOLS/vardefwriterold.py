@@ -20,6 +20,7 @@ for var in nd.keys():
 global  sym, symbol_list, symdict
 ########################################
 newfile = downloads +'suitecrm modulebuilder TransEXT - Sheet5.csv'
+newfile = downloads +'fieldsdocs - Sheet1.csv'
 import fileinput
 
 lines = rpu_rp.CsvToLines(newfile)
